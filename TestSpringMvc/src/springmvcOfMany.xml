@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+        
+        <!-- 配置自动扫描的包 -->
+        <context:component-scan base-package="com.test"></context:component-scan>
+        
+        <!-- 获取静态资源(要获取静态资源如js，css,html等) -->
+        <mvc:default-servlet-handler/>   
+        <!--
+        	1.解析@Controller，把请求分发到controller
+        	（如果不配置默认<mvc:default-servlet-handler/>,这时候默认servlet会包括所有扫描的地方，
+        		所有请求都会到所扫描的所有类中去找,这时候controller中是可以接受到请求的;
+        	 如果加了上面的标签，则相当于配置了springmvc的默认servlet，
+        		 那么需要配置这个注解来解析controller，否则会404，因为所配置的默认的servlet中没有这些controller，会找不到请求）
+        	2.数据绑定支持，最主要是对json的支持 .@NumberFormatannotation支持，@DateTimeFormat支持，@Valid支持，
+        	读写XML的支持（JAXB），读写JSON的支持（Jackson）。 
+        -->
+        <mvc:annotation-driven />
+        
+        <!-- 获取静态资源方法2 多种方法见web.xml中注释说明 ,看见有人把这个标签和上面配置默认servlet一起用的，但是经过测试发现只要用上面两行就可以了-->
+       	<!--  
+       		<mvc:resources mapping="/js/**" location="/js/"/> 
+      	-->
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         <!-- 配置 文件上传的支持 -->  
+         <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+             <property name="maxUploadSize" value="1024000000"/>  
+             <property name="resolveLazily" value="true"/>  
+             <property name="maxInMemorySize" value="4096"/>  
+             <property name="defaultEncoding" value="UTF-8"/>  
+         </bean>  
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- 
+        	多视图解析器：
+        		1：用order来表示优先级，0最优先，但是我发现一个问题，0如果用在默认的jsp上，那么html的就解析不了。
+        		       但是如果用在html解析器上，就都可以运行。JSP的这个视图解析器order必须在最后
+        		       
+        		2：用viewNames来指定是哪个视图解析器       
+        		
+        	经过测试这两个无法混合用	
+         -->
+        
+        <!-- 配置多视图解析器 jsp，html，json等-->
+    	<bean id="JspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    		<property name="order" value="256"></property>
+            <property name = "prefix" value = "/WEB-INF/views/"></property>
+            <property name = "suffix" value = ".jsp"></property>
+        </bean> 
+        
+        <!-- html解析 -->
+        <bean id="HtmlViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        	<property name = "viewClass" value = "com.test.view.HtmlViewResolver"/>  
+        	<property name = "prefix" value = "/WEB-INF/html/"></property>
+            <property name = "suffix" value = ".html"></property>
+            <property name = "contentType" value = "text/html;charset=UTF-8"></property>  
+        	<property name = "order" value="1"></property>  
+        </bean>
+        
+        <!-- 国际化基础配置 -->
+        <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        	<property name="basename" value="message"></property>
+        </bean>
+        <!-- 国际化动态切换配置    在spring配置文件中配置基于session的处理，将提交上来的locale参数进行处理，下列代码默认加载的语言是中文简体。 -->
+        <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+			<property name="defaultLocale" value="zh_CN"></property>
+		</bean>
+		 <!-- 拦截器 -->  
+        <mvc:interceptors>  
+            <!-- 多个拦截器，顺序执行 -->  
+           <bean class="com.test.interceptor.MyInterCeptor1"/>
+            
+            <mvc:interceptor>  
+                <mvc:mapping path="/curd/**"/>  
+                 <bean class="com.test.interceptor.MyInterCeptor2"/>
+            </mvc:interceptor>
+              
+            <!-- 国际化 -->  
+            <mvc:interceptor>  
+                <mvc:mapping path="/**"/>  
+                 <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+            </mvc:interceptor>  
+        </mvc:interceptors>  
+</beans>
