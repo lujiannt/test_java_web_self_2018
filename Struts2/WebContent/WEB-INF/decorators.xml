@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<decorators defaultdir="/WEB-INF/decorators">
+	<!--  -->
+	<excludes>
+        <pattern>/backend_login.action*</pattern>
+    </excludes>
+    
+    <decorator name="welcome" page="welcome.jsp">
+        <pattern>/backend_welcome.action</pattern>
+    </decorator>
+    
+    <decorator name="stat" page="stat.jsp">
+        <pattern>/stat_*.action</pattern>
+    </decorator>
+    
+    <decorator name="parameter" page="parameter.jsp">
+        <pattern>/customerCategory_*.action</pattern>
+        <pattern>/buildingCategory_*.action</pattern>
+        <pattern>/building_*.action</pattern>
+        <pattern>/buildingAdType_*.action</pattern>
+        <pattern>/buildingAdShape_*.action</pattern>
+        <pattern>/buildingAd_*.action</pattern>
+        <pattern>/bankAccount_*.action</pattern>
+        <pattern>/paymentType_*.action</pattern>
+        <pattern>/topProjectType_*.action</pattern>
+        <pattern>/projectType_*.action</pattern>
+    </decorator>
+    
+    <decorator name="member" page="member.jsp">
+        <pattern>/member_*.action</pattern>
+        <pattern>/memberLevel_*.action</pattern>
+        <pattern>/ticket_*.action</pattern>
+    </decorator>
+    
+    <decorator name="task" page="task.jsp">
+        <pattern>/task*.action</pattern>
+    </decorator>
+    
+    <decorator name="memberRecharge" page="memberRecharge.jsp">
+        <pattern>/memberRecharge*.action</pattern>
+    </decorator>
+    
+    <decorator name="advertisement" page="advertisement.jsp">
+        <pattern>/ad_*.action</pattern>
+        <pattern>/liveHome_*.action</pattern>
+        <pattern>/productHome_*.action</pattern>
+        <pattern>/news_*.action</pattern>
+        <pattern>/impeach_*.action</pattern>
+    </decorator>
+    
+    <decorator name="message" page="message.jsp">
+        <pattern>/message*.action</pattern>
+    </decorator>
+    
+    <!-- 直播­ -->
+    <decorator name="live" page="live.jsp">
+        <pattern>/live_*.action</pattern>
+    </decorator>
+    
+    <!-- 商城­ -->
+    <decorator name="product" page="product.jsp">
+  	  	<pattern>/productBrand_*.action</pattern>
+        <pattern>/productCategory_*.action</pattern>
+        <pattern>/productBrand_*.action</pattern>
+        <pattern>/product_*.action</pattern>
+        <pattern>/shop_*.action</pattern>
+    </decorator>
+    
+     <!-- 订单­ -->
+    <decorator name="order" page="order.jsp">
+        <pattern>/order_*.action</pattern>
+         <pattern>/pinTuan_*.action</pattern>
+    </decorator>
+    
+    <decorator name="system" page="system.jsp">
+        <pattern>/userConfig_*.action</pattern>
+        <pattern>/user_*.action</pattern>
+        <pattern>/roleConfig_*.action</pattern>
+        <pattern>/role_*.action</pattern>
+        <pattern>/organization_*.action</pattern>
+        <pattern>/logConfig_*.action</pattern>
+        <pattern>/productpackage_*.action</pattern>
+        <pattern>/bizscope_*.action</pattern>
+        <pattern>/supplierActiveCode_*.action</pattern>
+        <pattern>/systemoption_*.action</pattern>
+        <pattern>/feedback_*.action</pattern>
+        <pattern>/province_*.action</pattern>
+        <pattern>/city_*.action</pattern>
+        <pattern>/locationDistrict_*.action</pattern>
+        <pattern>/feedback_*.action</pattern>
+        <pattern>/sms_*.action</pattern>
+        <pattern>/freight_*.action</pattern>
+        <pattern>/dictionary_*.action</pattern>
+        <pattern>/dashi_*.action</pattern>
+    </decorator>
+    
+    <!-- 服务管理­ -->
+    <decorator name="service" page="service.jsp">
+       <pattern>/trademark_*.action</pattern>
+    </decorator>  
+    
+     <!-- 财务管理­ -->
+    <decorator name="account" page="account.jsp">
+    	 <pattern>/account_*.action</pattern>
+    </decorator>
+</decorators>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	
+	<field name="username">
+		<!-- 指定username不能为空 -->
+		<field-validator type="requiredstring">
+			<!-- 错误信息 -->
+			<message>用户名不能为空1223--------</message>
+		</field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">10</param>
+			<param name="minLength">6</param>
+			<message>用户名213必须在${minLength}-${maxLength}位之间</message>
+		</field-validator>
+	</field>
+
+
+</validators>	

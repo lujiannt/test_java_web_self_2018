@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	<!-- 对username属性进行校验 -->
+	<field name="userName">
+		<!-- 指定username不能为空 -->
+		<field-validator type="requiredstring">
+			<!-- 错误信息 -->
+			<message>用户名不能为空--------</message>
+		</field-validator>
+		<!-- 长度校验，规定用户名必须在6-10位之间 -->
+		<field-validator type="stringlength">
+			<param name="maxLength">10</param>
+			<param name="minLength">6</param>
+			<message>用户名必须在${minLength}-${maxLength}位之间</message>
+		</field-validator>
+	</field>
+
+	<!-- 对age进行校验，规定年龄必须在10-40之间 -->
+	<field name="age">
+		<field-validator type="int">
+			<param name="min">10</param>
+			<param name="max">40</param>
+			<message>年龄必须在${min}--${max}之间</message>
+		</field-validator>
+	</field>
+
+	<!-- 对birthday进行校验 -->
+	<field name="birthday">
+		<field-validator type="date">
+			<param name="min">1974-01-01</param>
+			<param name="max">2004-12-31</param>
+			<message>生日必须在${min}年到${max}年之间</message>
+		</field-validator>
+	</field>
+
+	<!-- 校验邮箱 -->
+	<field name="email">
+		<field-validator type="email">
+			<message>邮箱格式不正确</message>
+		</field-validator>
+	</field>
+
+	<!-- url校验 -->
+
+	<field name="url">
+		<field-validator type="url">
+			<message>url不能这空，类似于http://www.baidu.com</message>
+		</field-validator>
+	</field>
+
+	<!-- 使用正则 -->
+	<field name="telphone">
+		<field-validator type="regex">
+			<param name="regexExpression"><![CDATA[^135[0-9]{8}$]]></param>
+			<message>电话号码必须是135xxxxxxxx</message>
+		</field-validator>
+	</field>
+
+	<field name="repassword">
+		<field-validator type="fieldexpression">
+			<param name="expression"><![CDATA[(password==repassword)]]></param>
+			<message>两次密码输入不一致</message>
+		</field-validator>
+	</field>
+
+</validators>	

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.maxSize" value="2097"/>
+	<constant name="struts.custom.i18n.resources" value="message"/>
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	
+	
+    <package name="default" namespace="/" extends="struts-default">
+    	<interceptors>
+    		<interceptor name="myIn" class="com.lj.interceptor.MyInterceptor"></interceptor>
+    		<interceptor name="book" class="com.lj.interceptor.BookInterceptor">
+    			<param name="includeMethods">add,del</param>
+    		</interceptor>
+    	
+    		<interceptor-stack name="myStack">
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    			<interceptor-ref name="myIn"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    
+        <action name="hello" class="com.lj.test.hello.HelloAction" method="openToHello">
+        	<result name="success">
+        		/hello.jsp
+        	</result>
+        	<result name="input">
+        		/regist.jsp
+        	</result>
+        	<interceptor-ref name="myIn"></interceptor-ref>
+        </action>
+        
+        <action name="index" class="com.lj.test.hello.HelloAction" method="openToIndex">
+        	<result name="success">
+        		/regist.jsp
+        	</result>
+        	<result name="input">
+        		/regist.jsp
+        	</result>
+        </action>
+        
+         <action name="userindex" class="com.lj.test.user.UserAction" method="openToUserIndex">
+        	<result name="success">
+        		/regist1.jsp
+        	</result>
+        	<result name="input">
+        		/regist1.jsp
+        	</result>
+         </action>	
+         
+         
+       	<action name="va" class="com.lj.test.user.UserAction" method="va">
+        	<result name="success">
+        		/regist1.jsp
+        	</result>
+        	<result name="input">
+        		/regist1.jsp
+        	</result>
+        </action>
+        
+        <action name="book_*" class="com.lj.book.BookAction" method="{1}">
+        	<result name="success">
+        		/regist1.jsp
+        	</result>
+        	<result name="input">
+        		/regist1.jsp
+        	</result>
+        	<interceptor-ref name="book"></interceptor-ref>
+         </action>	
+        
+        
+         <action name="upload1" class="com.lj.book.BookAction" method="search">
+         <result name="success">
+        		/upload.jsp
+        	</result>
+         </action>
+        
+        <action name="upload" class="com.lj.book.BookAction" method="upload">
+        	<result name="success">
+        		/upload.jsp
+        	</result>
+        	<result name="fail">
+        		/upload.jsp
+        	</result>
+        	<result name="input">
+        		/upload.jsp
+        	</result>
+        	<!-- <interceptor-ref name="defaultStack">
+        		<param name="fileUpload.allowedExtensions">txt</param>
+        	</interceptor-ref>  -->
+        </action>
+        
+        <action name="download1" class="com.lj.book.BookAction" method="download1">
+        	<result type="stream" name="success">
+        		<param name="contentType">${contentType}</param>
+        		<param name="contentDisposition">attachment;fileName="${fileName}"</param>
+        		<param name="inputStream">${inputStream}</param>
+        	</result>
+        </action>
+        
+         <action name="download2" class="com.lj.book.BookAction" method="download1">
+        	<result type="stream" name="success">
+        		<param name="contentType">${contentType}</param>
+        		<param name="contentDisposition">attachment;fileName=${fileName}</param>
+        		<param name="inputName"></param>
+        	</result>
+        </action>
+        
+        <action name="regist" class="cn.itcast.action.UserAction" method="regist">
+			<result name="input">/regist.jsp</result>
+		</action>
+    </package>
+</struts>
