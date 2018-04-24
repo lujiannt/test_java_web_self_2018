@@ -35,17 +35,13 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
 		
-        <!--  
-        <mapping class="com.bjsxt.hibernate.Group"/>
-		<mapping class="com.bjsxt.hibernate.User"/>
-		<mapping resource="com/bjsxt/hibernate/Group.hbm.xml"/>
-		<mapping resource="com/bjsxt/hibernate/User.hbm.xml"/> 
-		 -->
-		<mapping resource="com/lj/core/model/Student.hbm.xml"/> 
-		 
+		<mapping resource="com/lj/compositeId/model/Student.hbm.xml"/> 
+		<mapping resource="com/lj/one2one/model/Husband2.hbm.xml"/> 
+		<mapping resource="com/lj/one2one/model/Wife2.hbm.xml"/> 
+		
 		<mapping class="com.lj.one2one.model.Husband"/>
 		<mapping class="com.lj.one2one.model.Wife"/>
-		<mapping class="com.lj.core.model.Teacher"/>
+		<mapping class="com.lj.compositeId.model.Teacher"/>
     </session-factory>
 
 </hibernate-configuration>

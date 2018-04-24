@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	<class name="com.lj.one2one.model.Husband2" table="lj_husband2">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<property name="husName"/>
+		<!-- 用onetoone会报错，这里使用了unique="true 就相当于 one2one了 -->
+		<many-to-one name="wife2" column="wifeId" unique="true"></many-to-one>
+	</class>
+</hibernate-mapping>
