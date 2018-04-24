@@ -30,4 +30,27 @@ public class Test1 {
 		tran.commit();
 		sessionFactory.close();
 	}
+	
+	/**
+	 * 多对一  xml
+	 * @author lujian
+	 * @create 2018年4月24日
+	 */
+	@Test
+	public void test2() {
+		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tran = session.beginTransaction();
+		
+		User2 user = new User2();
+		user.setName("曹亮");
+		
+		Group2 group = new Group2();
+		group.setName("想组");
+
+		session.save(user);
+		session.save(group);
+		tran.commit();
+		sessionFactory.close();
+	}
 }
