@@ -10,7 +10,7 @@
 		</id>
 		
 		<property name="husName"/>
-		<!-- 用onetoone会报错，这里使用了unique="true 就相当于 one2one了 -->
+		<!-- 用one2one会报错，这里使用了unique="true 就相当于 one2one了 -->
 		<many-to-one name="wife2" column="wifeId" unique="true"></many-to-one>
 	</class>
 </hibernate-mapping>
