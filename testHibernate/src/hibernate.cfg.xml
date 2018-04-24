@@ -38,10 +38,12 @@
 		<mapping resource="com/lj/compositeId/model/Student.hbm.xml"/> 
 		<mapping resource="com/lj/one2one/model/Husband2.hbm.xml"/> 
 		<mapping resource="com/lj/one2one/model/Wife2.hbm.xml"/> 
+		<mapping resource="com/lj/component/model/Person2.hbm.xml"/> 
 		
 		<mapping class="com.lj.one2one.model.Husband"/>
 		<mapping class="com.lj.one2one.model.Wife"/>
 		<mapping class="com.lj.compositeId.model.Teacher"/>
+		<mapping class="com.lj.component.model.Person"/>
     </session-factory>
 
 </hibernate-configuration>
