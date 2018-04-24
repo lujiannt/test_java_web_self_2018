@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	<class name="com.lj.core.model.Student" table="lj_student">
+		<composite-id name="studentPk" class="com.lj.core.model.StudentPk">
+			<key-property name="id"></key-property>
+			<key-property name="name"></key-property>
+		</composite-id>
+	
+		<property name="birth" column="birth"/>
+		<property name="isgood" column="isgood" type="yes_no"/>
+	</class>
+</hibernate-mapping>
