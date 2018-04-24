@@ -3,16 +3,13 @@ package com.lj.many2one.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="lj_user")
-public class User {
+@Table(name="lj_group")
+public class Group {
 	private int id;
 	private String name;
-	private Group group;
 	
 	@Id
 	@GeneratedValue
@@ -28,13 +25,6 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	@ManyToOne
-	@JoinColumn(name="groupId")
-	public Group getGroup() {
-		return group;
-	}
-	public void setGroup(Group group) {
-		this.group = group;
-	}
+	
 	
 }

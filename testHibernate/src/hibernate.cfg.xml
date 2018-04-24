@@ -42,6 +42,8 @@
 		
 		<mapping class="com.lj.one2one.model.Husband"/>
 		<mapping class="com.lj.one2one.model.Wife"/>
+		<mapping class="com.lj.many2one.model.User"/>
+		<mapping class="com.lj.many2one.model.Group"/>
 		<mapping class="com.lj.compositeId.model.Teacher"/>
 		<mapping class="com.lj.component.model.Person"/>
     </session-factory>
