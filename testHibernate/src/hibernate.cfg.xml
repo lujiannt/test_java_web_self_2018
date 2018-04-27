@@ -56,6 +56,8 @@
 		<mapping class="com.lj.one2many.model.Product"/>
 		<mapping class="com.lj.oneManyDouble.model.Order3"/>
 		<mapping class="com.lj.oneManyDouble.model.Product3"/>
+		<mapping class="com.lj.many2many.model.Cilent"/>
+		<mapping class="com.lj.many2many.model.FitCourse"/>
     </session-factory>
 
 </hibernate-configuration>
