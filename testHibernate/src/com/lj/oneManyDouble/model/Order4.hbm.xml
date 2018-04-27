@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	<class name="com.lj.oneManyDouble.model.Order4" table="lj_order4">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		
+		<property name="name"/>
+		<set name="products">
+			<key column="orderId"></key>
+			<one-to-many class="com.lj.oneManyDouble.model.Product4"/>
+		</set>
+	</class>
+</hibernate-mapping>

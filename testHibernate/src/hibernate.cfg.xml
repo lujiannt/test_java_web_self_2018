@@ -43,6 +43,8 @@
 		<mapping resource="com/lj/component/model/Person2.hbm.xml"/> 
 		<mapping resource="com/lj/one2many/model/Order2.hbm.xml"/> 
 		<mapping resource="com/lj/one2many/model/Product2.hbm.xml"/> 
+		<mapping resource="com/lj/oneManyDouble/model/Product4.hbm.xml"/> 
+		<mapping resource="com/lj/oneManyDouble/model/order4.hbm.xml"/> 
 		
 		<mapping class="com.lj.one2one.model.Husband"/>
 		<mapping class="com.lj.one2one.model.Wife"/>
