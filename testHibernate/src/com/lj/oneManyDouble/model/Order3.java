@@ -30,6 +30,7 @@ public class Order3 {
 	}
 	
 	//双向关联时在one2many的一方设置mappedby,由多的一方主导
+	//mappedBy指的是对方product中的order属性
 	@OneToMany(mappedBy="order")
 	public Set<Product3> getProducts() {
 		return products;
