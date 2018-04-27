@@ -60,6 +60,9 @@
 		<mapping class="com.lj.oneManyDouble.model.Product3"/>
 		<mapping class="com.lj.many2many.model.Cilent"/>
 		<mapping class="com.lj.many2many.model.FitCourse"/>
+		
+		<mapping class="com.lj.cascade.model.UserLj"/>
+		<mapping class="com.lj.cascade.model.CardLj"/>
     </session-factory>
 
 </hibernate-configuration>
