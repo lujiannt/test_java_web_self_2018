@@ -52,6 +52,8 @@
 		<mapping class="com.lj.component.model.Person"/>
 		<mapping class="com.lj.one2many.model.Order"/>
 		<mapping class="com.lj.one2many.model.Product"/>
+		<mapping class="com.lj.oneManyDouble.model.Order3"/>
+		<mapping class="com.lj.oneManyDouble.model.Product3"/>
     </session-factory>
 
 </hibernate-configuration>

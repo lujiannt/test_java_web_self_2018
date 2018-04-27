@@ -6,7 +6,7 @@ public class Tedian {
 	private int weight;
 	private String hobby;
 	
-	@Column(name="weight")
+	@Column(name="weight1")
 	public int getWeight() {
 		return weight;
 	}
