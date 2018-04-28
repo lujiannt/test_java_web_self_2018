@@ -45,7 +45,7 @@ public class Test1 {
 		Transaction tran = session.beginTransaction();
 		
 		CardLj cardLj = (CardLj) session.get(CardLj.class, 2);
-		//多的一方默认是eager，
+		//多的一方fetchtype默认是eager，
 		//假如设置成了lazy，那么不会left join user表了，只有在用到的时候才会读取一的一方（即打开下一行注释）
 		//System.out.println(cardLj.getUserlj().getName());
 		
