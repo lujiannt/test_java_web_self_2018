@@ -32,4 +32,22 @@ public class Test1 {
 		sessionFactory.close();
 	}
 	
+	/**
+	 * 测试级联读取-annotation
+	 * 在多的一方时，不需要设置，自动会读取级联对象
+	 * @author lujian
+	 * @create 2018年4月24日
+	 */
+	@Test
+	public void test2() {
+		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tran = session.beginTransaction();
+		
+		CardLj cardLj = (CardLj) session.get(CardLj.class, 2);
+		//System.out.println(cardLj.getUserlj().getName());
+		
+		tran.commit();
+		sessionFactory.close();
+	}
 }
