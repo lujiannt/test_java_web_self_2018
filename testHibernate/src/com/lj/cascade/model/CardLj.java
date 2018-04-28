@@ -38,7 +38,7 @@ public class CardLj {
 	}
 	
 	//多的一方FetchType默认是eager(会自动读取userLj),设置成lazy就不会自动带出userLj
-	@ManyToOne(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
+	@ManyToOne(cascade={CascadeType.ALL},fetch=FetchType.EAGER)
 	@JoinColumn(name="userId")
 	public UserLj getUserlj() {
 		return userlj;

@@ -1,22 +1,25 @@
 package com.lj.cascade.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * 测试级联-one2many-双向1的一方
+ * @author lujian
+ * @create 2018年4月27日
+ * @version 1.0
+ */
 @Entity
-@Table(name="lj_userLj")
-public class UserLj {
+@Table(name="lj_bicardLj")
+public class BiCardLj {
 	private int id;
 	private String name;
-	private Set<CardLj> cards = new HashSet<CardLj>();
 	
 	@Id
 	@GeneratedValue
@@ -31,15 +34,6 @@ public class UserLj {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	//双向
-	@OneToMany(mappedBy="userlj",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	public Set<CardLj> getCards() {
-		return cards;
-	}
-	public void setCards(Set<CardLj> cards) {
-		this.cards = cards;
 	}
 	
 }

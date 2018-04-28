@@ -8,15 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="lj_userLj")
-public class UserLj {
+@Table(name="lj_biuserLj")
+public class BiUserLj {
 	private int id;
 	private String name;
-	private Set<CardLj> cards = new HashSet<CardLj>();
+	private Set<BiCardLj> cards = new HashSet<BiCardLj>();
 	
 	@Id
 	@GeneratedValue
@@ -33,12 +34,12 @@ public class UserLj {
 		this.name = name;
 	}
 	
-	//双向
-	@OneToMany(mappedBy="userlj",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	public Set<CardLj> getCards() {
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name="usersId")
+	public Set<BiCardLj> getCards() {
 		return cards;
 	}
-	public void setCards(Set<CardLj> cards) {
+	public void setCards(Set<BiCardLj> cards) {
 		this.cards = cards;
 	}
 	
