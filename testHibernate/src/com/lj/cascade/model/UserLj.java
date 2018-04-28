@@ -33,8 +33,7 @@ public class UserLj {
 		this.name = name;
 	}
 	
-	//双向
-	@OneToMany(mappedBy="userlj",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="userlj", cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	public Set<CardLj> getCards() {
 		return cards;
 	}
