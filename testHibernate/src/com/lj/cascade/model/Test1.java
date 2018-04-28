@@ -47,6 +47,7 @@ public class Test1 {
 		CardLj cardLj = (CardLj) session.get(CardLj.class, 2);
 		//多的一方fetchtype默认是eager，
 		//假如设置成了lazy，那么不会left join user表了，只有在用到的时候才会读取一的一方（即打开下一行注释）
+		//在xml配置中是inverse=true；关联关系由对方管理：取我不用取对方，取对方时取我
 		//System.out.println(cardLj.getUserlj().getName());
 		
 		tran.commit();

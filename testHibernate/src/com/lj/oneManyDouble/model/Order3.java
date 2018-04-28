@@ -29,7 +29,8 @@ public class Order3 {
 		this.name = name;
 	}
 	
-	//双向关联时在one2many的一方设置mappedby,由多的一方主导
+	//双向关联时在one2many的一方设置mappedby,由多的一方主导外键关系
+	//如果不设置 (mappedBy="order")就会生成一张中间表
 	//mappedBy指的是对方product中的order属性
 	@OneToMany(mappedBy="order")
 	public Set<Product3> getProducts() {
