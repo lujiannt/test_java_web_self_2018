@@ -64,6 +64,9 @@
 		<mapping class="com.lj.cascade.model.CardLj"/>
 		<mapping class="com.lj.cascade.model.BiCardLj"/>
 		<mapping class="com.lj.cascade.model.BiUserLj"/>
+		<mapping class="com.lj.query.model.EmployCard"/>
+		<mapping class="com.lj.query.model.Company"/>
+		<mapping class="com.lj.query.model.Employee"/>
     </session-factory>
 
 </hibernate-configuration>
