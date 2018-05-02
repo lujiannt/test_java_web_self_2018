@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name="lj_employCard")
 public class EmployCard {
 	private int id;
-	private String name;
+	private String cardName;
 	private Employee employee;
 	
 	@Id
@@ -23,13 +23,12 @@ public class EmployCard {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getCardName() {
+		return cardName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
 	}
-	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="employeeId")
 	public Employee getEmployee() {

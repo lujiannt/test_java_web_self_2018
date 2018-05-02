@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name="lj_employee")
 public class Employee {
 	private int id;
-	private String name;
+	private String employeeName;
 	private Company company;
 	
 	@Id
@@ -23,11 +23,11 @@ public class Employee {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getEmployeeName() {
+		return employeeName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="companyId")
@@ -37,4 +37,10 @@ public class Employee {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + employeeName + ", company=" + company + "]";
+	}
+	
+	
 }
