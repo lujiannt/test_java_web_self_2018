@@ -4,6 +4,8 @@ package com.lj.cascade.model;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.junit.Test;
 
 import com.lj.util.SessionFactoryUtil;
@@ -125,5 +127,15 @@ public class Test1 {
 		session.save(user);
 		tran.commit();
 		sessionFactory.close();
+	}
+	
+	/**
+	 * 测试生成表语句
+	 * @author lujian
+	 * @create 2018年4月30日
+	 */
+	@Test
+	public void test6() {
+		new SchemaExport(new AnnotationConfiguration().configure()).create(false, true);
 	}
 }
