@@ -29,6 +29,7 @@ public class EmployCard {
 	public void setCardName(String cardName) {
 		this.cardName = cardName;
 	}
+	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="employeeId")
 	public Employee getEmployee() {
@@ -36,6 +37,11 @@ public class EmployCard {
 	}
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+	
+	@Override
+	public String toString() {
+		return "EmployCard [id=" + id + ", cardName=" + cardName + ", employee=" + employee + "]";
 	}
 	
 	

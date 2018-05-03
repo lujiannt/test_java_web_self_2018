@@ -30,6 +30,7 @@ public class CardInfoDto {
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
+	
 	@Override
 	public String toString() {
 		return "CardInfoDto [id=" + id + ", cardName=" + cardName + ", employeeName=" + employeeName + "]";

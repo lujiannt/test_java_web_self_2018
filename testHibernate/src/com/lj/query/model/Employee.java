@@ -29,6 +29,7 @@ public class Employee {
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
+	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="companyId")
 	public Company getCompany() {
@@ -37,6 +38,7 @@ public class Employee {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
+	
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", name=" + employeeName + ", company=" + company + "]";
