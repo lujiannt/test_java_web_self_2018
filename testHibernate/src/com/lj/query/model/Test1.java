@@ -1,9 +1,13 @@
 
 package com.lj.query.model;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,6 +19,12 @@ import com.lj.util.SessionFactoryUtil;
 
 public class Test1 {
 	private static final SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+	private static EmployCard testcard = new EmployCard();
+	
+	static {
+		testcard.setCardName("信用卡1");
+		testcard.setCardNumber("abc11");
+	}
 	
 	public static Session getMySession() {
 		return sessionFactory.getCurrentSession();
@@ -81,12 +91,16 @@ public class Test1 {
 			
 			EmployCard card = new EmployCard();
 			card.setCardName("工资卡"+i);
+			card.setLine(10000+i*3000);
+			card.setCardNumber("abc"+i);
 			card.setEmployee(employee);
+			card.setCreatTime(new Date());
 			session.save(card);
 		}
 		
 		tran.commit();
-		sessionFactory.close();
+		//session.close(); 这里使用的是getcurrentSession() 事务提交时会自动关闭session
+		//sessionFactory.close(); 这里在afterClass中关闭了
 	}
 	
 	/**
@@ -119,7 +133,8 @@ public class Test1 {
 		}
 		
 		tran.commit();
-		sessionFactory.close();
+		//session.close(); 这里使用的是getcurrentSession() 事务提交时会自动关闭session
+		//sessionFactory.close(); 这里在afterClass中关闭了
 	}
 	
 	/**
@@ -153,7 +168,8 @@ public class Test1 {
 		}
 		
 		tran.commit();
-		sessionFactory.close();
+		//session.close(); 这里使用的是getcurrentSession() 事务提交时会自动关闭session
+		//sessionFactory.close(); 这里在afterClass中关闭了
 	}
 	
 	/**
@@ -184,10 +200,56 @@ public class Test1 {
 		}
 		
 		tran.commit();
-		sessionFactory.close();
+		//session.close(); 这里使用的是getcurrentSession() 事务提交时会自动关闭session
+		//sessionFactory.close(); 这里在afterClass中关闭了
 	}
 	
+	/**
+	 * 多条件查询-使用map和 setProperties
+	 * @author lujian
+	 * @create 2018年5月3日
+	 */
+	@Test
+	public void test5() {
+		Session session = getMySession();
+		Transaction tran = session.beginTransaction();
+		
+		StringBuilder hqlStr = new StringBuilder("from EmployCard ec where 1=1 ");
+		Map<String, Object> params = new HashMap<String, Object>();
+		//isNotEmpty(str)等价于 str != null && str.length > 0
+		//isNotBlank(str)等价于 str != null && str.length > 0 && str.trim().length > 0
+		
+		if(StringUtils.isNotBlank(testcard.getCardName())) {
+			hqlStr.append("and ec.cardName = :cardName ");
+			params.put("cardName", testcard.getCardName());
+		}
+		if(StringUtils.isNotBlank(testcard.getCardNumber())) {
+			hqlStr.append("and ec.cardNumber = :cardNumber ");
+			params.put("cardNumber", testcard.getCardNumber());
+		}
+		if(testcard.getCreatTime()!=null) {
+			hqlStr.append("and ec.creatTime = :creatTime ");
+			params.put("creatTime", testcard.getCreatTime());
+		}
+		
+		System.out.println(hqlStr.toString());
+		Query query = session.createQuery(hqlStr.toString());
+		query.setProperties(params);
+		List<EmployCard> list = query.list();
+		for(EmployCard c : list) {
+			System.out.println(c);
+		}
+		
+		tran.commit();
+	}
+	
+	
+	
+	
+	
+	
 	/*-----------------测试查询--------------------*/
+	
 	@Test
 	public void testHQL_01() {
 		Session session = getMySession();
