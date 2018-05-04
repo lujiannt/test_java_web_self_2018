@@ -25,9 +25,14 @@
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
 
-        <!-- Disable the second-level cache  -->
+        <!-- Disable the second-level cache  
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
-
+        -->
+        <property name="cache.use_second_level_cache">true</property>
+        <property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+		<property name="cache.use_query_cache">true</property>
+		
+		
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
@@ -35,6 +40,8 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
 		
+		
+		<!-- 映射 -->
 		<mapping resource="com/lj/compositeId/model/Student.hbm.xml"/> 
 		<mapping resource="com/lj/one2one/model/Husband2.hbm.xml"/> 
 		<mapping resource="com/lj/one2one/model/Wife2.hbm.xml"/> 
@@ -67,6 +74,8 @@
 		<mapping class="com.lj.query.model.EmployCard"/>
 		<mapping class="com.lj.query.model.Company"/>
 		<mapping class="com.lj.query.model.Employee"/>
+		<mapping class="com.lj.cache.model.Owner"/>
+		<mapping class="com.lj.cache.model.Dog"/>
     </session-factory>
 
 </hibernate-configuration>
