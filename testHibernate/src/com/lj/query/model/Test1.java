@@ -534,4 +534,234 @@ public class Test1 {
 		
 		session.getTransaction().commit();
 	}
+	
+	//is empty and is not empty
+	/**
+	 * 查询一的一方中没有多的一方的情况--HQL语句is empty（如 查询没有商品的订单）
+	 * @author lujian
+	 * @create 2018年5月4日
+	 * 用product和order举例子不用hql里 is empty可以用下述两种方法
+	 * 方法1:not exists (和in ，not in的区别：效率，少量元素用in，其他用exists)
+	 * SELECT *
+		FROM
+			lj_order o
+		WHERE
+			NOT EXISTS (
+				SELECT
+					*
+				FROM
+					lj_product p
+				WHERE
+					p.orderId = o.id
+			)
+	 * 		
+	 *  方法2:left join
+	 *  SELECT *
+		FROM
+			lj_order o
+		left join
+			lj_product lp
+		on 
+			o.id = lp.orderId
+		where 
+			lp.orderId is null			
+	 */
+	@Test
+	public void testHQL_20() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("from Company t where t.employees is empty");
+		
+		for(Object o : q.list()) {
+			Company t = (Company)o;
+			System.out.println(t.getId() + "-" + t.getName());
+		}
+		session.getTransaction().commit();
+	}
+	
+	@Test
+	public void testHQL_21() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("from Company t where t.name like '%中%'");
+		
+		for(Object o : q.list()) {
+			Company t = (Company)o;
+			System.out.println(t.getId() + "-" + t.getName());
+		}
+		session.getTransaction().commit();
+	}
+	
+	@Test
+	public void testHQL_22() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("from Company t where t.name like '_中'");
+		
+		for(Object o : q.list()) {
+			Company t = (Company)o;
+			System.out.println(t.getId() + "-" + t.getName());
+		}
+		session.getTransaction().commit();
+	}
+	
+	//不重要
+	@Test
+	public void testHQL_23() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("select lower(t.name)," +
+											 "upper(t.name)," +
+											 "trim(t.name)," +
+											 "concat(t.name, '***')," +
+											 "length(t.name)" +
+											 " from Company t ");
+		
+		for(Object o : q.list()) {
+			Object[] arr = (Object[])o;
+			System.out.println(arr[0] + "-" + arr[1] + "-" + arr[2] + "-" + arr[3] + "-" + arr[4] + "-");
+		}
+		session.getTransaction().commit();
+	}
+	
+	@Test
+	public void testHQL_24() {
+		Session session = getMySession();
+		session.beginTransaction();
+		
+		Query q = session.createQuery("select abs(t.id)," +
+											 "sqrt(t.id)," +
+											 "mod(t.id, 2)" +
+											 " from Company t ");
+		
+		for(Object o : q.list()) {
+			Object[] arr = (Object[])o;
+			System.out.println(arr[0] + "-" + arr[1] + "-" + arr[2] );
+		}
+		session.getTransaction().commit();
+	}
+	
+	@Test
+	public void testHQL_25() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("select current_date, current_time, current_timestamp, t.id from Company t");
+		
+		for(Object o : q.list()) {
+			Object[] arr = (Object[])o;
+			System.out.println(arr[0] + " | " + arr[1] + " | " + arr[2] + " | " + arr[3]);
+		}
+		session.getTransaction().commit();
+	}
+	
+	@Test
+	public void testHQL_26() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("from EmployCard t where t.creatTime < :date");
+		q.setParameter("date", new Date());
+		for(Object o : q.list()) {
+			EmployCard t = (EmployCard)o;
+			System.out.println(t.getCardName());
+		}
+		session.getTransaction().commit();
+	}
+	
+	@Test
+	public void testHQL_27() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("select t.cardName, count(*) from EmployCard t group by t.cardName") ;
+		for(Object o : q.list()) {
+			Object[] arr = (Object[])o;
+			System.out.println(arr[0] + "|" + arr[1]);
+		}
+		session.getTransaction().commit();
+	}
+	
+	/**
+	 * having是对group by后的分组进行条件筛选，并且having后面要使用函数
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@Test
+	public void testHQL_28() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("select t.cardName, count(*) from EmployCard t group by t.cardName having count(*) > 1") ;
+		for(Object o : q.list()) {
+			Object[] arr = (Object[])o;
+			System.out.println(arr[0] + "|" + arr[1]);
+		}
+		session.getTransaction().commit();
+	}
+	
+	@Test
+	public void testHQL_29() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("from EmployCard t where t.id < (select avg(t.id) from EmployCard t)") ;
+		for(Object o : q.list()) {
+			EmployCard t = (EmployCard)o;
+			System.out.println(t.getCardName());
+		}
+		session.getTransaction().commit();
+	}
+	
+	/**
+	 * all指所有的，这里可以用max 或者min就行了，没必要用all
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@Test
+	public void testHQL_30() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("from EmployCard t where t.id < ALL (select t.id from EmployCard t where mod(t.id, 2)= 0) ") ;
+		for(Object o : q.list()) {
+			EmployCard t = (EmployCard)o;
+			System.out.println(t.getCardName());
+		}
+		session.getTransaction().commit();
+	}
+	
+	//用in 可以实现exists的功能
+	//但是exists执行效率高
+	/**
+	 * not exists 和 test20一样的效果
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@Test
+	public void testHQL_31() {
+		Session session = getMySession();
+		session.beginTransaction();// t.id not in (1)
+		Query q = session.createQuery("from Company t where not exists (select m.id from Employee m where m.company.id=t.id)") ;
+		for(Object o : q.list()) {
+			Company t = (Company)o;
+			System.out.println(t.getName());
+		}
+		session.getTransaction().commit();
+	}
+	
+	//update and delete
+	//规范并没有说明是不是要更新persistent object，所以如果要使用，建议在单独的trasaction中执行
+	@Test
+	public void testHQL_32() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query q = session.createQuery("update Company t set t.name = upper(t.name) where t.id = 4") ;
+		
+		q.executeUpdate();
+		
+		q = session.createQuery("from Company where id = 4");
+		for(Object o : q.list()) {
+			Company t = (Company)o;
+			System.out.println(t.getName());
+		}
+		session.createQuery("update Company t set t.name = lower(t.name) where t.id = 4")
+			.executeUpdate();
+		
+		session.getTransaction().commit();
+	}
 }
