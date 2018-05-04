@@ -8,10 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Restrictions;
 import org.junit.AfterClass;
 import org.junit.Test;
 
@@ -761,6 +764,143 @@ public class Test1 {
 		}
 		session.createQuery("update Company t set t.name = lower(t.name) where t.id = 4")
 			.executeUpdate();
+		
+		session.getTransaction().commit();
+	}
+	
+	/**
+	 * QBC QBE  
+	 * createCriteria默认发出的sql就是left join语句，不会产生1+n问题
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@Test
+	public void testQBC() {
+		Session session = getMySession();
+		session.beginTransaction();
+		
+		//criterion 标准/准则/约束
+		Criteria c = session.createCriteria(Employee.class) //from Topic
+					 .add(Restrictions.gt("id", 2)) //greater than = id > 2
+					 .add(Restrictions.lt("id", 8)) //little than = id < 8
+					 .add(Restrictions.like("employeeName", "%高%"))
+					 .createCriteria("company")
+					 .add(Restrictions.between("id", 1, 3)) //category.id >= 3 and category.id <=5
+					 ;
+		//DetachedCriterea
+		for(Object o : c.list()) {
+			Employee t = (Employee)o;
+			System.out.println(t.toString());
+		}
+		
+		session.getTransaction().commit();
+	}
+	
+	/**
+	 * QBE 
+	 * 使用Example，可以用于多条件查询，然后直接传值tExample
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@Test
+	public void testQBE() {
+		Session session = getMySession();
+		session.beginTransaction();
+		
+		Employee tExample = new Employee();
+		tExample.setEmployeeName("%高%");
+		
+		Example e = Example.create(tExample)
+					.ignoreCase().enableLike();
+		Criteria c = session.createCriteria(Employee.class)
+					 .add(Restrictions.gt("id", 2))
+					 .add(Restrictions.lt("id", 8))
+					 .add(e)
+					 ;
+					 
+		
+		for(Object o : c.list()) {
+			Employee t = (Employee)o;
+			System.out.println(t.toString());
+		}
+		session.getTransaction().commit();
+	}
+	
+	
+	/**
+	 * 测试1+N问题
+	 * 方法1:
+	 * 在many2one中设置 fetch=fetchType.lazy(many2one默认是eager),这样就会在使用时才会发出多条一方的语句
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@SuppressWarnings("unchecked")
+	@Test
+	public void test1_N_1() {
+		Session session = getMySession();
+		session.beginTransaction();
+		
+		Query c = session.createQuery("from Employee");
+		List<Employee> employees = c.list();
+		for(Employee o : employees) {
+			System.out.println(1);
+			//System.out.println(o.getCompany().getName());
+		}
+		
+		session.getTransaction().commit();
+	}
+	
+	/**
+	 * 测试1+N问题
+	 * 方法2:
+	 * 在一的一方设置batchsize，这样sql就会用in一次查询多条
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@SuppressWarnings("unchecked")
+	@Test
+	public void test1_N_2() {
+		Session session = getMySession();
+		session.beginTransaction();
+		
+		Query c = session.createQuery("from Employee");
+		List<Employee> employees = c.list();
+		for(Employee o : employees) {
+			System.out.println(1);
+			//System.out.println(o.getCompany().getName());
+		}
+		
+		session.getTransaction().commit();
+	}
+	
+	/**
+	 * 测试1+N问题
+	 * 方法3:
+	 * 使用fetch join  等同于使用  QBC
+	 * 
+	 * 拓展：
+	 * 	     在xml中配置也是这样，在<many-to-one fetch="join" lazy="true"  inverse="true" cascade="all" />
+	 * 	 	1.fetch="select" lazy="false" 就会产生1+N
+	 *   	2.fetch="select" lazy="true" 就是方法1
+	 *   	3.fetch="join" 不管lazy设置成什么 都没用，因为此时 是外连接查询,不是查完多方再单独查一方 
+	 * 
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@SuppressWarnings("unchecked")
+	@Test
+	public void test1_N_3() {
+		Session session = getMySession();
+		session.beginTransaction();
+		
+		//fetch就是在代码这一层给你一个主动抓取得机会. 由多的一方抓取一的一方
+		//可以在lazy="true"的情况下把fetch去掉，就会报异常. 如果lazy="false"就不需要fetch了
+		Query c = session.createQuery("from Employee e left join fetch e.company c");
+		List<Employee> employees = c.list();
+		for(Employee o : employees) {
+			System.out.println(1);
+			System.out.println(o.getCompany().getName());
+		}
 		
 		session.getTransaction().commit();
 	}

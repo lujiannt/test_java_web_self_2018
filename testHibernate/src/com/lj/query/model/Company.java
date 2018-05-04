@@ -5,8 +5,11 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.BatchSize;
+
 @Entity
 @Table(name="lj_company")
+//@BatchSize(size=5)
 public class Company {
 	private int id;
 	private String name;
