@@ -3,6 +3,7 @@ package com.lj.query.model;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -900,6 +901,56 @@ public class Test1 {
 		for(Employee o : employees) {
 			System.out.println(1);
 			System.out.println(o.getCompany().getName());
+		}
+		
+		session.getTransaction().commit();
+	}
+	
+	
+	/**
+	 * list查询
+	 * 	list和iterator区别：
+	 *  	1.list是查询所有属性数据，iterator是先只查询id，用到时再用该id再次查询
+	 * 		2.list查询都是新的查询，iterator会先从缓存中找，如果没有再查询
+	 *  
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testlist() {
+		Session session = getMySession();
+		session.beginTransaction();
+		Query c = session.createQuery("from Employee");
+		List<Employee> employees = c.list();
+		for(Employee o : employees) {
+			System.out.println(o.getCompany().getName());
+		}
+		
+		session.getTransaction().commit();
+	}
+	
+	/**
+	 * iterator查询
+	 * 	list和iterator区别：
+	 *  	1.list是查询所有属性数据，iterator是先只查询id，用到时再用该id再次查询
+	 * 		2.list查询都是新的查询，iterator会先从缓存中找，如果没有再查询
+	 *  
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testiterator() {
+		Session session = getMySession();
+		session.beginTransaction();
+		
+		Query c = session.createQuery("from Employee");
+		Iterator<Employee> employees = c.iterate();
+		
+		while(employees.hasNext()) {
+			Employee em = employees.next();
+			//System.out.println(em.toString());
 		}
 		
 		session.getTransaction().commit();
