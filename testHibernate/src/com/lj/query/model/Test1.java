@@ -250,6 +250,11 @@ public class Test1 {
 	
 	/*-----------------测试查询--------------------*/
 	
+	/**
+	 * 普通hql
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
 	@Test
 	public void testHQL_01() {
 		Session session = getMySession();
@@ -263,6 +268,26 @@ public class Test1 {
 		
 		tran.commit();
 	}
+	
+	/**
+	 * 使用sql 
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@Test
+	public void testHQL_01_2() {
+		Session session = getMySession();
+		Transaction tran = session.beginTransaction();
+		
+		Query q = session.createSQLQuery("select * from lj_company").addEntity(Company.class);
+		List<Company> companys = (List<Company>)q.list();
+		for(Company c : companys) {
+			System.out.println(c.getName());
+		}
+		
+		tran.commit();
+	}
+	
 	
 	@Test
 	public void testHQL_02() {
