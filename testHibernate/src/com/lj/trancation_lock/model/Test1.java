@@ -1,8 +1,12 @@
 
-package com.lj.lock.model;
+package com.lj.trancation_lock.model;
 
+import java.math.BigDecimal;
+
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.junit.AfterClass;
 import org.junit.Test;
 
@@ -67,21 +71,69 @@ public class Test1 {
 	//			1.annotation中使用@version，进行版本记录与比较
 	//			2.xml中使用<version name="" column=""><version/>	
 	
+	
 	/**
-	 * 测试一级缓存
+	 * 插入数据
 	 * 同一个session 存在一级缓存，只发一条sql
 	 * @author lujian
 	 * @create 2018年5月4日
 	 */
 	@Test
-	public void testCache_1() {
+	public void testinsert() {
 		Session session = getMySession();
 		session.beginTransaction();
 		
+		Account account = new Account();
+		account.setBlance(new BigDecimal("1000"));
+		session.save(account);
 		
 		session.getTransaction().commit();
 	}
 	
+	/**
+	 * 测试悲观锁
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@Test
+	public void testlock_1() {
+		Session session = getMySession();
+		session.beginTransaction();
+		
+		Account account = (Account) session.get(Account.class, 1, LockMode.UPGRADE);
+		
+		session.getTransaction().commit();
+	}
 	
+	/**
+	 * 测试乐观锁
+	 * @author lujian
+	 * @create 2018年5月4日
+	 */
+	@Test
+	public void testlock_2() {
+		Session session = sessionFactory.openSession();
+		Session session2 = sessionFactory.openSession();
+		
+		Transaction tran2 = session2.beginTransaction();
+		Transaction tran1 = session.beginTransaction();
+		Account a1 = (Account) session.load(Account.class, 1);
+		System.out.println("第一次 a1 version :" + a1.getVersion());
+		
+		//System.out.println(tran1 == tran2);
+		Account a2 = (Account) session2.load(Account.class, 1);
+		System.out.println("第一次 a2 version :" + a2.getVersion());
+		
+		a1.setBlance(new BigDecimal("900"));
+		a2.setBlance(new BigDecimal("1900"));
+		
+		tran1.commit();
+		System.out.println("第二次 a1 version :" + a1.getVersion());
+		System.out.println("第二次 a2 version :" + a2.getVersion());
+		session.close();
+		
+		tran2.commit();
+		session2.close();
+	}
 	
 }
