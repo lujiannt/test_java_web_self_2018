@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from mb_user where userName like #{userName}
 	</select>
 	
-	<!-- ${}指的是拼接 -->
+	<!-- ${}指的是拼接,如果传递的参数是简单参数，那么${}中就只能用value，即 ${value} -->
 	<select id="getUserByName2" parameterType="hashMap" resultType="com.lj.mybatis.model.User">
 		select * from mb_user where userName like '%${userName}%';
 	</select>
