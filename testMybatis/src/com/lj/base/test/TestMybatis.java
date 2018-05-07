@@ -128,4 +128,47 @@ public class TestMybatis {
 		
 		sqlSession.close();
 	}
+	
+	/**
+	 * 测试插入1
+	 * SELECT @@IDENTITY AS id  +  不设置order=AFTER
+	 * @author lujian
+	 * @throws IOException 
+	 * @create 2018年5月7日
+	 */
+	@Test
+	public void test5() throws IOException {
+		SqlSession sqlSession = getSqlSession();
+		
+		User user = new User();
+		user.setUserName("周涛");
+		user.setAge(25);
+		//这里insert城后返回值是1，不是新增的id
+		int id = sqlSession.insert("insertUser", user);
+		System.out.println(id+"         "+user.getId());
+		
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	
+	/**
+	 * 测试插入2
+	 * SELECT LAST_INSERT_ID()  +  不设置order=AFTER
+	 * @author lujian
+	 * @throws IOException 
+	 * @create 2018年5月7日
+	 */
+	@Test
+	public void test6() throws IOException {
+		SqlSession sqlSession = getSqlSession();
+		
+		User user = new User();
+		user.setUserName("周涛");
+		user.setAge(25);
+		int id = sqlSession.insert("insertUser1", user);
+		System.out.println(id+"         "+user.getId());
+		
+		sqlSession.commit();
+		sqlSession.close();
+	}
 }

@@ -20,8 +20,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- ${}指的是拼接,如果传递的参数是简单参数，那么${}中就只能用value，即 ${value}; 我们这儿用的是复杂参数 map -->
 	<select id="getUserByName2" parameterType="hashMap" resultType="com.lj.mybatis.model.User">
-		select * from mb_user where userName like '%${userName}%';
+		select * from mb_user where userName like '%${userName}%'
 	</select>
+	
+	<!-- 经过测试 order默认值="AFTER"，并且 SELECT @@IDENTITY AS id函数一样使用-->
+	<insert id="insertUser" parameterType="com.lj.mybatis.model.User">
+		insert into mb_user(userName,age) values (#{userName},#{age})
+		<selectKey  keyProperty="id"  resultType="int">
+			SELECT @@IDENTITY AS id
+		</selectKey>
+	</insert>
+	
+	<insert id="insertUser1" parameterType="com.lj.mybatis.model.User">
+		insert into mb_user(userName,age) values (#{userName},#{age})
+		<selectKey  keyProperty="id" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 </mapper>
 
 
