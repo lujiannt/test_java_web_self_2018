@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="test">
+<mapper namespace="user">
 	
 	<select id="getUserById1" parameterType="int" resultType="com.lj.mybatis.model.User">
 		select * from mb_user where id = #{value}
