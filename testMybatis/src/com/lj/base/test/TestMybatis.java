@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import com.lj.mybatis.model.User;
 
-public class TestbaseMybatis {
+public class TestMybatis {
 	public static SqlSessionFactory sqlSessionFactory;
 	
 	static {
