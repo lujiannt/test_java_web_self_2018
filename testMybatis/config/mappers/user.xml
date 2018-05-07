@@ -4,7 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="user">
-	
+	<!-- mybatis中没有parameterClass和resultClass，现在都换成了xxxxType -->
+	<!-- #{}是占位符 相当于 ？ -->
 	<select id="getUserById1" parameterType="int" resultType="com.lj.mybatis.model.User">
 		select * from mb_user where id = #{value}
 	</select>
@@ -13,7 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from mb_user where id = #{id}
 	</select>
 	
+	<select id="getUserByName1" parameterType="hashMap" resultType="com.lj.mybatis.model.User">
+		select * from mb_user where userName like #{userName}
+	</select>
 	
+	<!-- ${}指的是拼接 -->
+	<select id="getUserByName2" parameterType="hashMap" resultType="com.lj.mybatis.model.User">
+		select * from mb_user where userName like '%${userName}%';
+	</select>
 </mapper>
 
 

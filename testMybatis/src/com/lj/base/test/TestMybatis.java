@@ -86,6 +86,7 @@ public class TestMybatis {
 	}
 	
 	/**
+	 * 查询返回list-使用#{}占位符
 	 * @author lujian
 	 * @throws IOException 
 	 * @create 2018年5月7日
@@ -94,6 +95,36 @@ public class TestMybatis {
 	public void test3() throws IOException {
 		SqlSession sqlSession = getSqlSession();
 		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("userName", "%张%");
+		List<User> userList = sqlSession.selectList("getUserByName1", map);
+		if(userList.size() > 0) {
+			for(User user : userList) {
+				System.out.println(user.toString());
+			}
+		}
+		
+		sqlSession.close();
+	}
+	
+	/**
+	 * 查询返回list-使用${}拼接
+	 * @author lujian
+	 * @throws IOException 
+	 * @create 2018年5月7日
+	 */
+	@Test
+	public void test4() throws IOException {
+		SqlSession sqlSession = getSqlSession();
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("userName", "张");
+		List<User> userList = sqlSession.selectList("getUserByName2", map);
+		if(userList.size() > 0) {
+			for(User user : userList) {
+				System.out.println(user.toString());
+			}
+		}
 		
 		sqlSession.close();
 	}
