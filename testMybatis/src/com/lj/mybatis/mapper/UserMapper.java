@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.lj.mybatis.model.User;
 
+/**
+ * 如何使用mapper代理
+ * @author lujian
+ * @create 2018年5月9日
+ * @version 1.0
+ */
 public interface UserMapper {
 	//相当于节省了写dao层实现，mybatis会自动生成执行
 	//1.userMapper.xml中namespace要对应该mapper全名
