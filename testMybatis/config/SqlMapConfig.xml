@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			<mapper class="com.lj.mybatis.mapper.UserMapper"></mapper>
 		 -->
 		 
-		<!-- 方法3： 通过扫描包直接映射所有mapper -->
+		<!-- 方法3： 批量加载mapper -->
 		<package name="com.lj.mybatis.mapper"></package>
 	</mappers>
 	
