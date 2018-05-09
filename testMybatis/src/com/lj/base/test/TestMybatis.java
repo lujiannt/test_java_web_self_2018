@@ -13,18 +13,22 @@ import org.junit.Test;
 import com.lj.mybatis.model.User;
 
 public class TestMybatis {
-	public static SqlSessionFactory sqlSessionFactory;
+	public static final SqlSessionFactory sqlSessionFactory = buildFactory();
 	
-	static {
+	public static SqlSessionFactory buildFactory() {
 		InputStream is;
+		SqlSessionFactory sqlSessionFactory = null;
 		
 		try {
-			//通过流创建session工厂
+			
 			is = Resources.getResourceAsStream("SqlMapConfig.xml");
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		return sqlSessionFactory;
 	}
 	
 	public static SqlSession getSqlSession() {
@@ -167,6 +171,70 @@ public class TestMybatis {
 		user.setAge(25);
 		int id = sqlSession.insert("insertUser1", user);
 		System.out.println(id+"         "+user.getId());
+		
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	
+	/**
+	 * 测试删除
+	 * @author lujian
+	 * @throws IOException 
+	 * @create 2018年5月7日
+	 */
+	@Test
+	public void test7() throws IOException {
+		SqlSession sqlSession = getSqlSession();
+		
+		sqlSession.delete("delettUserById", 14);
+		
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	
+	/**
+	 * 测试更新1
+	 * @author lujian
+	 * @throws IOException 
+	 * @create 2018年5月7日
+	 */
+	@Test
+	public void test8() throws IOException {
+		SqlSession sqlSession = getSqlSession();
+		
+		User user = new User();
+		user.setId(12);
+		user.setUserName("周涛1");
+		sqlSession.update("updateUser1", user);
+		
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	
+	/**
+	 * 测试更新2 -- 会报错
+	 * 
+	 * 测试 <dynamic prepend="SET">
+		    <isNotNull prepend="," property="userName">
+		       userName  = #{userName}
+		    </isNotNull>
+		    <isNotNull prepend="," property="age">
+		       age  = #{age}
+		    </isNotNull>
+		</dynamic>
+	 * @author lujian
+	 * @throws IOException 
+	 * @create 2018年5月7日
+	 */
+	@Test
+	public void test9() throws IOException {
+		SqlSession sqlSession = getSqlSession();
+		
+		User user = new User();
+		user.setId(12);
+		user.setUserName("周涛1");
+		user.setAge(10);
+		sqlSession.update("updateUser2", user);
 		
 		sqlSession.commit();
 		sqlSession.close();

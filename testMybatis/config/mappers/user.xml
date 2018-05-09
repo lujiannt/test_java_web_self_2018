@@ -36,7 +36,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey  keyProperty="id" order="AFTER" resultType="int">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-	</insert>
+	</insert> 
+		
+	<delete id="delettUserById" parameterType="int">
+		delete from mb_user where id = #{id};
+	</delete>
+	
+	<update id="updateUser1" parameterType="com.lj.mybatis.model.User">
+		update mb_user set userName = #{userName} where id = #{id};
+	</update>
 </mapper>
 
 
