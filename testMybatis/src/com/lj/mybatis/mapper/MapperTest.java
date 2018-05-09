@@ -12,6 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.lj.mybatis.model.User;
+import com.lj.mybatis.model.UserExtend;
+import com.lj.mybatis.model.UserVo;
 
 public class MapperTest {
 	private SqlSessionFactory sqlSessionFactory;
@@ -53,6 +55,28 @@ public class MapperTest {
 		
 		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 		List<User> list = userMapper.getUsersByName("涛");
+		System.out.println(list.toString());
+		
+		sqlSession.close();
+	}
+	
+	/**
+	 * 测试简单mapper编程_包装类
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	@Test
+	public void test3() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		
+		UserExtend userExtend = new UserExtend();
+		userExtend.setUserName("周涛");
+		UserVo userVo = new UserVo();
+		userVo.setUserExtend(userExtend);
+		List<UserVo> list = userMapper.getUsersByComplex(userVo);
 		System.out.println(list.toString());
 		
 		sqlSession.close();

@@ -3,6 +3,8 @@ package com.lj.mybatis.mapper;
 import java.util.List;
 
 import com.lj.mybatis.model.User;
+import com.lj.mybatis.model.UserExtend;
+import com.lj.mybatis.model.UserVo;
 
 /**
  * 如何使用mapper代理
@@ -16,9 +18,29 @@ public interface UserMapper {
 	//2.方法名和userMapper.xml中的id要一致
 	//3.方法返回值要一致
 	//4.方法参数要一致
+	
+	
 	User getUserById(int id) throws Exception;
 	
-	//测试mapper编程 返回list
-	//mybatis会自动区分调用selectList和SelectOne
+	/**
+	 * 测试mapper编程 返回list
+	 * mybatis会自动区分调用selectList和SelectOne
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
 	List<User> getUsersByName(String userName) throws Exception;
+	
+	
+	/**
+	 * 测试包装对象
+	 * @param userVo
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	List<UserVo> getUsersByComplex(UserVo userVo) throws Exception;
 }
