@@ -3,7 +3,6 @@ package com.lj.mybatis.mapper;
 import java.util.List;
 
 import com.lj.mybatis.model.User;
-import com.lj.mybatis.model.UserExtend;
 import com.lj.mybatis.model.UserVo;
 
 /**

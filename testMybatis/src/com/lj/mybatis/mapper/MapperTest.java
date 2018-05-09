@@ -11,9 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.lj.mybatis.model.User;
-import com.lj.mybatis.model.UserExtend;
-import com.lj.mybatis.model.UserVo;
+import com.lj.mybatis.model.*;
 
 public class MapperTest {
 	private SqlSessionFactory sqlSessionFactory;
@@ -72,10 +70,10 @@ public class MapperTest {
 		
 		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 		
-		UserExtend userExtend = new UserExtend();
-		userExtend.setUserName("周涛");
+		User user = new User();
+		user.setUserName("周涛");
 		UserVo userVo = new UserVo();
-		userVo.setUserExtend(userExtend);
+		userVo.setUser(user);
 		List<UserVo> list = userMapper.getUsersByComplex(userVo);
 		System.out.println(list.toString());
 		

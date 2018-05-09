@@ -7,13 +7,13 @@ package com.lj.mybatis.model;
  * @version 1.0
  */
 public class UserVo extends User{
-	protected UserExtend userExtend;
+	protected User user;
 
-	public UserExtend getUserExtend() {
-		return userExtend;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserExtend(UserExtend userExtend) {
-		this.userExtend = userExtend;
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

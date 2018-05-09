@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getUsersByComplex" parameterType="com.lj.mybatis.model.UserVo" resultType="UserVo">
-		select * from mb_user where userName like '%${userExtend.userName}%'
+		select * from mb_user where userName like '%${user.userName}%'
 	</select>
 </mapper>
 
