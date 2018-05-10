@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lj.mybatis.mapper.OrderMapper">
+	
+	<resultMap type="com.lj.mybatis.model.Order" id="orderResulstMap">
+		<id column="id" property="id"/>
+		<result column="userId" property="userId"/>
+		<result column="orderNo" property="orderNo"/>
+		<result column="createTime" property="createTime"/>
+		
+		<association property="user" javaType="com.lj.mybatis.model.User">
+			<id column="userId" property="id"/>
+			<result column="userName" property="userName"/>
+			<result column="age" property="age"/>
+		</association>
+	</resultMap>
+	
+	<select id="getOrdersByResulstMap" parameterType="String" resultMap="orderResulstMap">
+		select *  from mb_order
+		<where>
+			<if test="value!=null and value!=''">
+				orderNo like '%${value}%'
+			</if>
+		</where>
+	</select>
+</mapper>
+
+
