@@ -7,24 +7,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<resultMap type="com.lj.mybatis.model.Order" id="orderResulstMap">
 		<id column="id " property="id"/>
-		<result column="userId" property="userId"/>
 		<result column="orderNo" property="orderNo"/>
 		<result column="createTime" property="createTime"/>
 		
 		<association property="user" javaType="com.lj.mybatis.model.User">
-			<id column="userId" property="id"/>
-			<result column="userName" property="userName"/>
-			<result column="age" property="age"/>
+			<id column="uId" property="userId"/>
 		</association>
 	</resultMap>
 	
 	<select id="getOrdersByResulstMap" parameterType="String" resultMap="orderResulstMap">
-		select *  from mb_order
-		<where>
-			<if test="value!=null and value!=''">
-				orderNo like '%${value}%'
-			</if>
-		</where>
+		select o.*,u.userId as uId  from mb_order o, mb_user u where o.userId = u.userId 
 	</select>
 </mapper>
 

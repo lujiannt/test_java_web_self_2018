@@ -112,6 +112,7 @@ public class MapperTest {
 		OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
 		
 		List<Order> list = orderMapper.getOrdersByResulstMap(null);
+		System.out.println(list.size());
 		System.out.println(list.toString());
 		
 		sqlSession.close();

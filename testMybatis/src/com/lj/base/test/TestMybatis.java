@@ -149,7 +149,7 @@ public class TestMybatis {
 		user.setAge(25);
 		//这里insert城后返回值是1，不是新增的id
 		int id = sqlSession.insert("insertUser", user);
-		System.out.println(id+"         "+user.getId());
+		System.out.println(id+"         "+user.getUserId());
 		
 		sqlSession.commit();
 		sqlSession.close();
@@ -170,7 +170,7 @@ public class TestMybatis {
 		user.setUserName("周涛");
 		user.setAge(25);
 		int id = sqlSession.insert("insertUser1", user);
-		System.out.println(id+"         "+user.getId());
+		System.out.println(id+"         "+user.getUserId());
 		
 		sqlSession.commit();
 		sqlSession.close();
@@ -203,7 +203,7 @@ public class TestMybatis {
 		SqlSession sqlSession = getSqlSession();
 		
 		User user = new User();
-		user.setId(12);
+		user.setUserId(12);
 		user.setUserName("周涛1");
 		sqlSession.update("updateUser1", user);
 		
@@ -231,7 +231,7 @@ public class TestMybatis {
 		SqlSession sqlSession = getSqlSession();
 		
 		User user = new User();
-		user.setId(12);
+		user.setUserId(12);
 		user.setUserName("周涛1");
 		user.setAge(10);
 		sqlSession.update("updateUser2", user);
