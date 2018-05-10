@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.lj.mybatis.mapper.OrderMapper">
 	
 	<resultMap type="com.lj.mybatis.model.Order" id="orderResulstMap">
-		<id column="id" property="id"/>
+		<id column="id " property="id"/>
 		<result column="userId" property="userId"/>
 		<result column="orderNo" property="orderNo"/>
 		<result column="createTime" property="createTime"/>
