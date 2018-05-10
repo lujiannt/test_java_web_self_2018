@@ -2,6 +2,7 @@ package com.lj.mybatis.mapper;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -93,6 +94,33 @@ public class MapperTest {
 		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 		
 		List<User> list = userMapper.getUsersByResulstMap("周涛");
+		System.out.println(list.toString());
+		
+		sqlSession.close();
+	}
+	
+	/**
+	 * 测试简单mapper编程_sql代码块
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	@Test
+	public void test5() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		List<Integer> ids = new ArrayList<Integer>();
+		ids.add(3);
+		ids.add(8);
+		ids.add(13);
+		User user = new User();
+		user.setUserName("周涛");
+		UserVo userVo = new UserVo();
+		userVo.setUser(user);
+		userVo.setIds(ids);
+		
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		List<UserVo> list = userMapper.getUsersByComplex(userVo);
 		System.out.println(list.toString());
 		
 		sqlSession.close();

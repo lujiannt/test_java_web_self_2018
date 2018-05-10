@@ -3,7 +3,7 @@ package com.lj.mybatis.model;
 public class User {
 	private int id;
 	private String userName;
-	private int age;
+	private Integer age;
 	
 	public int getId() {
 		return id;
@@ -17,13 +17,12 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
-	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", age=" + age + "]";
