@@ -42,4 +42,14 @@ public interface UserMapper {
 	 * @create 2018年5月9日
 	 */
 	List<UserVo> getUsersByComplex(UserVo userVo) throws Exception;
+	
+	/**
+	 * 测试resultMap (当表列名与model类属性名不一致时使用)
+	 * @param userVo
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	List<User> getUsersByResulstMap(String userName) throws Exception;
 }

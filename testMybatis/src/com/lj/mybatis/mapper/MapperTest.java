@@ -79,4 +79,23 @@ public class MapperTest {
 		
 		sqlSession.close();
 	}
+	
+	/**
+	 * 测试简单mapper编程_resultMap
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	@Test
+	public void test4() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		
+		List<User> list = userMapper.getUsersByResulstMap("周涛");
+		System.out.println(list.toString());
+		
+		sqlSession.close();
+	}
+	
 }
