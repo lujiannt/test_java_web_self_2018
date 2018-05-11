@@ -82,7 +82,7 @@ public class MapperTest {
 	}
 	
 	/**
-	 * 测试简单mapper编程_resultMap_简单使用
+	 * 测试简单mapper编程_resultMap_简单使用(当查询字段和model字段不一致时--)
 	 * @throws Exception
 	 * @author lujian
 	 * @create 2018年5月9日
@@ -100,7 +100,7 @@ public class MapperTest {
 	}
 	
 	/**
-	 * 测试简单mapper编程_resultMap_具体使用
+	 * 测试简单mapper编程_resultMap_具体使用one2one
 	 * @throws Exception
 	 * @author lujian
 	 * @create 2018年5月9日
@@ -111,9 +111,33 @@ public class MapperTest {
 		
 		OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
 		
-		List<Order> list = orderMapper.getOrdersByResulstMap(null);
+		List<Order> list = orderMapper.getOrdersByResulstMapOne2One();
 		System.out.println(list.size());
 		System.out.println(list.toString());
+		
+		sqlSession.close();
+	}
+	
+	/**
+	 * 测试简单mapper编程_resultMap_具体使用one2many
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	@Test
+	public void test7() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+		
+		List<Order> list = orderMapper.getOrdersByResulstMapOne2Many();
+		for(Order o : list) {
+			System.out.println(o.toString());
+			for(OrderProduct op : o.getOrderProducts()) {
+				System.out.println(op.toString());
+			}
+			System.out.println("------------------------------");
+		}
 		
 		sqlSession.close();
 	}

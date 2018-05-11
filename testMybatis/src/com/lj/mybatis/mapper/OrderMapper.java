@@ -13,12 +13,22 @@ import com.lj.mybatis.model.Order;
 public interface OrderMapper {
 	
 	/**
-	 * 测试resultMap (当表列名与model类属性名不一致时使用, 具体可以适用于如本方法中这种情况-order里面有个user)
+	 * 测试resultMap_复杂使用_one2one
 	 * @param orderNo
 	 * @return
 	 * @throws Exception
 	 * @author lujian
 	 * @create 2018年5月9日
 	 */
-	List<Order> getOrdersByResulstMap(String orderNo) throws Exception;
+	List<Order> getOrdersByResulstMapOne2One() throws Exception;
+
+	/**
+	 * 测试resultMap_复杂使用_one2many
+	 * @param orderNo
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	List<Order> getOrdersByResulstMapOne2Many() throws Exception;
 }

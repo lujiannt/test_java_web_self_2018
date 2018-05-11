@@ -7,7 +7,7 @@ public class OrderProduct {
 	protected int orderId;
 	protected String productName;
 	protected BigDecimal price;
-	protected int number;
+	protected Integer number;
 	
 	public int getId() {
 		return id;
@@ -33,10 +33,10 @@ public class OrderProduct {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	public int getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
-	public void setNumber(int number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 	@Override

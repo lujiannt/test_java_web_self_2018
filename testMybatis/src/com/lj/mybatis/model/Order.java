@@ -1,6 +1,7 @@
 package com.lj.mybatis.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 	protected int id;
@@ -10,6 +11,8 @@ public class Order {
 	
 	/*user*/
 	protected User user;
+	/*products*/
+	protected List<OrderProduct> orderProducts;
 	
 	public User getUser() {
 		return user;
@@ -40,6 +43,12 @@ public class Order {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public List<OrderProduct> getOrderProducts() {
+		return orderProducts;
+	}
+	public void setOrderProducts(List<OrderProduct> orderProducts) {
+		this.orderProducts = orderProducts;
 	}
 	@Override
 	public String toString() {

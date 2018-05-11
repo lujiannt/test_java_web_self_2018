@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.lj.mybatis.mapper.OrderMapper">
 	
-	<resultMap type="com.lj.mybatis.model.Order" id="orderResulstMap">
+	<resultMap id="orderResulstMapOne2one" type="com.lj.mybatis.model.Order">
 		<id column="id" property="id"/>
 		<result column="user_id" property="userId"/>
 		<result column="orderNo" property="orderNo"/>
@@ -14,16 +14,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<association property="user"  javaType="com.lj.mybatis.model.User">
 			<result column="user_id" property="id"/>
 			<result column="userName" property="userName"/>
+			<result column="age" property="age"/>
 		</association> 
 	</resultMap>
 	
-	<select id="getOrdersByResulstMap" parameterType="String" resultMap="orderResulstMap">
+	<resultMap id="orderResulstMapOne2many" type="com.lj.mybatis.model.Order" extends="orderResulstMapOne2one">
+		<collection property="orderProducts" ofType="com.lj.mybatis.model.OrderProduct">
+			<result column="orderProductId" property="id"/>
+			<result column="id" property="orderId"/>
+			<result column="productName" property="productName"/>
+			<result column="price" property="price"/>
+			<result column="number" property="number"/>
+		</collection> 
+	</resultMap>
+	
+	<select id="getOrdersByResulstMapOne2One" resultMap="orderResulstMapOne2one">
 		select 
-			mb_order.*,mb_user.userName
+			mb_order.*,mb_user.*
 		from 
 			mb_order, mb_user
 		where
 		    mb_order.user_id = mb_user.id	
+	</select>
+	
+	<select id="getOrdersByResulstMapOne2Many" resultMap="orderResulstMapOne2many">
+		select 
+			mb_order.*,
+			mb_orderProduct.id as orderProductId,
+			mb_orderProduct.productName,
+			mb_orderProduct.price,
+			mb_orderProduct.number
+		from 
+			mb_order, mb_orderProduct
+		where
+		    mb_order.id = mb_orderProduct.orderId	
 	</select>
 </mapper>
 
