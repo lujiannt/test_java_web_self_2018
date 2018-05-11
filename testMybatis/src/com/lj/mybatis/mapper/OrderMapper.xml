@@ -6,17 +6,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.lj.mybatis.mapper.OrderMapper">
 	
 	<resultMap type="com.lj.mybatis.model.Order" id="orderResulstMap">
-		<id column="id " property="id"/>
+		<id column="id" property="id"/>
+		<result column="user_id" property="userId"/>
 		<result column="orderNo" property="orderNo"/>
 		<result column="createTime" property="createTime"/>
 		
-		<association property="user" javaType="com.lj.mybatis.model.User">
-			<id column="uId" property="userId"/>
-		</association>
+		<association property="user"  javaType="com.lj.mybatis.model.User">
+			<result column="user_id" property="id"/>
+			<result column="userName" property="userName"/>
+		</association> 
 	</resultMap>
 	
 	<select id="getOrdersByResulstMap" parameterType="String" resultMap="orderResulstMap">
-		select o.*,u.userId as uId  from mb_order o, mb_user u where o.userId = u.userId 
+		select 
+			mb_order.*,mb_user.userName
+		from 
+			mb_order, mb_user
+		where
+		    mb_order.user_id = mb_user.id	
 	</select>
 </mapper>
 

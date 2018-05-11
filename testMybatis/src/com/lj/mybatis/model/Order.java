@@ -6,6 +6,7 @@ public class Order {
 	protected int id;
 	protected String orderNo;
 	protected Date createTime;
+	protected int userId;
 	
 	/*user*/
 	protected User user;
@@ -33,6 +34,12 @@ public class Order {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	@Override
 	public String toString() {
