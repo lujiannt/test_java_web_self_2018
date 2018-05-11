@@ -49,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		    mb_order.id = mb_orderProduct.orderId	
 	</select>
+	
 </mapper>
 
 
