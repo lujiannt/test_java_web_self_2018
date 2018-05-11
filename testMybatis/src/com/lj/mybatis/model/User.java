@@ -1,10 +1,22 @@
 package com.lj.mybatis.model;
 
+import java.util.List;
+
 public class User {
 	private int id;
 	private String userName;
 	private Integer age;
 	
+	/*用户-订单 one2many*/
+	private List<Order> orders;
+	
+	
+	public List<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 	public int getId() {
 		return id;
 	}
@@ -25,7 +37,8 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", age=" + age + "]";
+		return "User [id=" + id + ", userName=" + userName + ", age=" + age + ", orders=" + orders.size() + "]";
 	}
+	
 	
 }

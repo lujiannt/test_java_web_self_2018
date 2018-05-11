@@ -28,6 +28,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</collection> 
 	</resultMap>
 	
+	<resultMap id="orderResulstMapMany2many" type="com.lj.mybatis.model.User">
+		<result column="id" property="id"/>
+		<result column="userName" property="userName"/>
+		<result column="age" property="age"/>
+		
+		<collection property="orders" ofType="com.lj.mybatis.model.Order">
+			<id column="orderId" property="id"/>
+			<result column="orderNo" property="orderNo"/>
+			<result column="createTime" property="createTime"/>
+			
+			<collection property="orderProducts" ofType="com.lj.mybatis.model.OrderProduct">
+				<result column="orderProductId" property="id"/>
+				<result column="id" property="orderId"/>
+				<result column="productName" property="productName"/>
+				<result column="price" property="price"/>
+				<result column="number" property="number"/>
+			</collection> 
+		</collection> 
+	</resultMap>
+	
 	<select id="getOrdersByResulstMapOne2One" resultMap="orderResulstMapOne2one">
 		select 
 			mb_order.*,mb_user.*
@@ -41,6 +61,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select 
 			mb_order.*,
 			mb_user.*,
+			mb_orderProduct.id as orderProductId,
+			mb_orderProduct.productName,
+			mb_orderProduct.price,
+			mb_orderProduct.number
+		from 
+			mb_order, mb_user, mb_orderProduct
+		where
+		    mb_order.id = mb_orderProduct.orderId	and  mb_order.user_id = mb_user.id	
+	</select>
+	
+	<select id="getOrdersByResulstMapMany2Many" resultMap="orderResulstMapMany2many">
+		select 
+			mb_user.*,
+			mb_order.id as orderId,
+			mb_order.OrderNo,
+			mb_order.createTime,
 			mb_orderProduct.id as orderProductId,
 			mb_orderProduct.productName,
 			mb_orderProduct.price,

@@ -143,6 +143,35 @@ public class MapperTest {
 	}
 	
 	/**
+	 * 测试简单mapper编程_resultMap_具体使用_多层嵌套(这里只是为了显示嵌套，而user和product正好逻辑上是多对多,所以方法名叫many2many)
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	@Test
+	public void test8() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+		
+		List<User> list = orderMapper.getOrdersByResulstMapMany2Many();
+		for(User u : list) {
+			System.out.println(u.toString());
+			
+			for(Order o : u.getOrders()) {
+				System.out.println(o.toString());
+				
+				for(OrderProduct op : o.getOrderProducts()) {
+					System.out.println(op.toString());
+				}
+			}
+			System.out.println("------------------------------");
+		}
+		
+		sqlSession.close();
+	}
+	
+	/**
 	 * 测试简单mapper编程_sql代码块
 	 * @throws Exception
 	 * @author lujian
