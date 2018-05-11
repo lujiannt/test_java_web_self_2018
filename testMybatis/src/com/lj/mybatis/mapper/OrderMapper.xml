@@ -40,14 +40,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getOrdersByResulstMapOne2Many" resultMap="orderResulstMapOne2many">
 		select 
 			mb_order.*,
+			mb_user.*,
 			mb_orderProduct.id as orderProductId,
 			mb_orderProduct.productName,
 			mb_orderProduct.price,
 			mb_orderProduct.number
 		from 
-			mb_order, mb_orderProduct
+			mb_order, mb_user, mb_orderProduct
 		where
-		    mb_order.id = mb_orderProduct.orderId	
+		    mb_order.id = mb_orderProduct.orderId	and  mb_order.user_id = mb_user.id	
 	</select>
 	
 </mapper>
