@@ -193,7 +193,7 @@ public class MapperTest {
 		
 		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 		List<UserVo> list = userMapper.getUsersByComplex(userVo);
-		System.out.println(list.toString());
+		System.out.println(list.size());
 		
 		sqlSession.close();
 	}
