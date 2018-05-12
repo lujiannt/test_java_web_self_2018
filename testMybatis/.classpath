@@ -10,7 +10,7 @@
 	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-api-2.0-rc1.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-core-2.0-rc1.jar"/>
-	<classpathentry kind="lib" path="lib/mybatis-3.2.7.jar"/>
+	<classpathentry kind="lib" path="lib/mybatis-3.2.7.jar" sourcepath="F:/java视频/传智播客_Springmvc+Mybatis由浅入深教程/资料/mybatis第一天/res/jar包/mybatis-3.2.7"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.7-bin.jar"/>
 	<classpathentry kind="lib" path="lib/ojdbc14-10.2.0.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.5.jar"/>
