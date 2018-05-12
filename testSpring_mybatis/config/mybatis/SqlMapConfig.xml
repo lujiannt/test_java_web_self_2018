@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 别名 -->
+	<typeAliases>
+		<!-- 1.普通用法 
+		<typeAlias type="com.lj.mybatis.model.User" alias="user"></typeAlias>
+		-->
+		
+		<!-- 2.批量扫描 -->
+		<package name="com.lj.mybatis.model"></package>
+	</typeAliases>
+	
+	<!-- 加载 映射文件 -->
+	<mappers>
+		<mapper resource="sqlMappers/user.xml"></mapper>
+		
+		<!-- 方法1：通过xml查找映射 
+			<mapper resource="mappers/userMapper.xml"></mapper> 
+		-->
+		
+		<!-- 方法2：通过mapper查找    1：xml文件名字要和mapper文件一致  2：放在同一目录
+			<mapper class="com.lj.mybatis.mapper.UserMapper"></mapper>
+		 -->
+		 
+		<!-- 方法3： 批量加载mapper -->
+		<package name="com.lj.mapper"></package>
+	</mappers>
+	
+</configuration>
