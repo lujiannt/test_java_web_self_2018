@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<cache></cache>
 	 -->
 	<!-- 引用ehcache -->
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
+	<cache flushInterval="60000" type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
 	
 	<sql id="order_update_sql">
 		<if test="orderNo != null and orderNo !=''">

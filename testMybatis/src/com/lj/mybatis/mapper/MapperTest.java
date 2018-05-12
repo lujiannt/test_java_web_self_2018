@@ -261,7 +261,8 @@ public class MapperTest {
 	 * 		useCache默认="true",意思是当打开二级缓存时，该条select语句使用二级缓存
 	 * 	3.mapper.xml中flushCache="true"的作用
 	 * 		flushCache默认="true",即更新时会刷新（清空）该mapper的二级缓存
-	 *  4.控制台输出的命中率信息  DEBUG [main] - Cache Hit Ratio [com.lj.mybatis.mapper.OrderMapper]: 0.5
+	 * 	4.flushInterval的作用，强制多少时间自动刷新
+	 *  5.控制台输出的命中率信息  DEBUG [main] - Cache Hit Ratio [com.lj.mybatis.mapper.OrderMapper]: 0.5
 	 *  
 	 * 三.整合ehcache:
 	 * 	1.ehcache介绍:一个分布式缓存框架（光靠mybatis自己的缓存不能实现分布式，只能在一个服务器）
