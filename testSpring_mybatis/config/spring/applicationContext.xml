@@ -56,18 +56,9 @@
 	</bean>
 	-->
 	
-	<!-- mapper扫描包配置 （上述配置需要配置多个mapper，很麻烦）
+	<!-- mapper扫描包配置 （上述配置需要配置多个mapper，很麻烦）-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.lj.mapper"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-	</bean>-->
-	
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<!-- 指定扫描的包名 
-		如果扫描多个包，每个包中间使用半角逗号分隔
-		-->
-		<property name="basePackage" value="com.lj.mapper"/>
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-		
 	</bean>
 </beans>
