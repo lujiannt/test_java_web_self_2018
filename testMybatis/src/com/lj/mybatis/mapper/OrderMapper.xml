@@ -4,20 +4,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lj.mybatis.mapper.OrderMapper">
-	
+	<!-- one2one -->
 	<resultMap id="orderResulstMapOne2one" type="com.lj.mybatis.model.Order">
 		<id column="id" property="id"/>
 		<result column="user_id" property="userId"/>
 		<result column="orderNo" property="orderNo"/>
 		<result column="createTime" property="createTime"/>
 		
+		<!--
 		<association property="user"  javaType="com.lj.mybatis.model.User">
-			<result column="user_id" property="id"/>
+			<id column="user_id" property="id"/>
 			<result column="userName" property="userName"/>
 			<result column="age" property="age"/>
 		</association> 
+		--> 
+		
+		<!-- autoMapping="true"会自动映射 --> 
+		<association property="user"  javaType="com.lj.mybatis.model.User" autoMapping="true">
+		</association> 
+		
 	</resultMap>
 	
+	<!-- one2many 这里继承了上面的resultMap -->
 	<resultMap id="orderResulstMapOne2many" type="com.lj.mybatis.model.Order" extends="orderResulstMapOne2one">
 		<collection property="orderProducts" ofType="com.lj.mybatis.model.OrderProduct">
 			<result column="orderProductId" property="id"/>
@@ -28,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</collection> 
 	</resultMap>
 	
+	<!-- 多层嵌套 collection里面还有collection -->
 	<resultMap id="orderResulstMapMany2many" type="com.lj.mybatis.model.User">
 		<result column="id" property="id"/>
 		<result column="userName" property="userName"/>
@@ -46,6 +55,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<result column="number" property="number"/>
 			</collection> 
 		</collection> 
+	</resultMap>
+	
+	<!-- 延迟加载 -->
+	<resultMap id="ordersLazyMap" type="com.lj.mybatis.model.Order">
+		<id column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="orderNo" property="orderNo"/>
+		<result column="createTime" property="createTime"/>
+		
+		<association property="user"  javaType="com.lj.mybatis.model.User" select="com.lj.mybatis.mapper.UserMapper.getUserById" column="user_id"  autoMapping="true">
+		</association> 
 	</resultMap>
 	
 	<select id="getOrdersByResulstMapOne2One" resultMap="orderResulstMapOne2one">
@@ -86,6 +106,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		    mb_order.id = mb_orderProduct.orderId	and  mb_order.user_id = mb_user.id	
 	</select>
+	
+	<select id="getOrdersLazy" resultMap="ordersLazyMap">
+		select 
+			*
+		from 
+			mb_order
+	</select>
+	
 	
 </mapper>
 

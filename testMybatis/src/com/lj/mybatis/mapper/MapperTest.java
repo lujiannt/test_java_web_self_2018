@@ -198,4 +198,23 @@ public class MapperTest {
 		sqlSession.close();
 	}
 	
+	/**
+	 * 测试延迟加载
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	@Test
+	public void test9() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+		List<Order> list = orderMapper.getOrdersLazy();
+		for(Order o : list) {
+			System.out.println(o.toString());
+		}
+		
+		sqlSession.close();
+	}
+	
 }

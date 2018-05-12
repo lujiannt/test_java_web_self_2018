@@ -3,8 +3,17 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!-- 该文件中有默认顺序，否则会报错,下面是从报错里面拷出来的 -->
+	<!-- properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?,plugins?,environments?,databaseIdProvider?,mappers? -->
+
 	<!-- 加载db -->
 	<properties resource="db.properties"></properties>
+	
+	<!-- 开启延迟加载,关闭积极延迟加载 -->
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+	</settings>
 	
 	<!-- 别名 -->
 	<typeAliases>

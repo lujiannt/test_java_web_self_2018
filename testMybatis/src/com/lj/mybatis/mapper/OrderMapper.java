@@ -42,4 +42,14 @@ public interface OrderMapper {
 	 * @create 2018年5月9日
 	 */
 	List<User> getOrdersByResulstMapMany2Many() throws Exception;
+	
+	/**
+	 * 测试延迟加载_一开始只查询order，在使用到user时再查user
+	 * @param orderNo
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	List<Order> getOrdersLazy() throws Exception;
 }

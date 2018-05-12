@@ -37,7 +37,7 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", age=" + age + ", orders=" + orders.size() + "]";
+		return "User [id=" + id + ", userName=" + userName + ", age=" + age + "]";
 	}
 	
 	
