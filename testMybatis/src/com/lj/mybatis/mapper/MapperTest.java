@@ -300,4 +300,35 @@ public class MapperTest {
 		Order order1 = orderMapper1.getOrder(1);
 		sqlSession2.close();
 	}
+	
+	/**
+	 * mapper_annotation测试_查询
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月12日
+	 */
+	@Test
+	public void test12() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		UserAnnotationMapper userMapper = sqlSession.getMapper(UserAnnotationMapper.class);
+		User user = userMapper.findUser_annotation(1);
+		System.out.println(user.toString());
+	}
+	
+	/**
+	 * mapper_annotation测试_插入
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月12日
+	 */
+	@Test
+	public void test13() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		UserAnnotationMapper userMapper = sqlSession.getMapper(UserAnnotationMapper.class);
+		User user = new User();
+		user.setUserName("蔡依林");
+		user.setAge(40);
+		userMapper.addUser_annotation(user);
+		System.out.println(user.toString());
+	}
 }
