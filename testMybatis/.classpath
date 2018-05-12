@@ -15,6 +15,8 @@
 	<classpathentry kind="lib" path="lib/ojdbc14-10.2.0.1.0.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.7.5.jar"/>
+	<classpathentry kind="lib" path="lib/ehcache-core-2.6.5.jar"/>
+	<classpathentry kind="lib" path="lib/mybatis-ehcache-1.0.2.jar" sourcepath="F:/java视频/传智播客_Springmvc+Mybatis由浅入深教程/资料/mybatis第一天/res/jar包/mybatis-3-mybatis-3.2.7"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -262,6 +262,16 @@ public class MapperTest {
 	 * 	3.mapper.xml中flushCache="true"的作用
 	 * 		flushCache默认="true",即更新时会刷新（清空）该mapper的二级缓存
 	 *  4.控制台输出的命中率信息  DEBUG [main] - Cache Hit Ratio [com.lj.mybatis.mapper.OrderMapper]: 0.5
+	 *  
+	 * 三.整合ehcache:
+	 * 	1.本质:mybatis本身的缓存机制并不是多么优秀，第三方的更专业优秀效率安全等都更好。
+	 * 		    但是mybatis提供了cache接口让用户自己实现或引用第三方(核心)，并且mybatis自己有默认实现的cache类
+	 * 	2.整合步骤:
+	 * 		1.引入ehcache相关jar包
+	 * 			ehcache-core-2.6.5.jar 和mybatis-ehcache-1.0.2.jar
+	 * 		2.配置ehcache.xml
+	 * 		3.在对应mapper中的cache标签中使用type 
+	 * 			<cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
 	 * 
 	 * @throws Exception
 	 * @author lujian
@@ -277,12 +287,12 @@ public class MapperTest {
 		Order order = orderMapper.getOrder(1);
 		sqlSession1.close();
 		
-		OrderMapper orderMapper2 = sqlSession3.getMapper(OrderMapper.class);
-		Order order2 = orderMapper2.getOrder(1);
-		order2.setOrderNo("22No");
-		orderMapper2.updateOrder(order);
-		sqlSession3.commit();
-		sqlSession3.close();
+//		OrderMapper orderMapper2 = sqlSession3.getMapper(OrderMapper.class);
+//		Order order2 = orderMapper2.getOrder(1);
+//		order2.setOrderNo("22No");
+//		orderMapper2.updateOrder(order);
+//		sqlSession3.commit();
+//		sqlSession3.close();
 		
 		OrderMapper orderMapper1 = sqlSession2.getMapper(OrderMapper.class);
 		Order order1 = orderMapper1.getOrder(1);
