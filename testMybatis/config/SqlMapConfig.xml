@@ -9,10 +9,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<!-- 加载db -->
 	<properties resource="db.properties"></properties>
 	
-	<!-- 开启延迟加载,关闭积极延迟加载 -->
+	
 	<settings>
+		<!-- 开启延迟加载,关闭积极延迟加载 -->
 		<setting name="lazyLoadingEnabled" value="true"/>
 		<setting name="aggressiveLazyLoading" value="false"/>
+		
+		<!-- 开启二级缓存总开关，mapper中也要设置（同hibernate差不读） -->
+		<setting name="cacheEnabled" value="true"/>
 	</settings>
 	
 	<!-- 别名 -->

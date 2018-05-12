@@ -220,7 +220,7 @@ public class MapperTest {
 	/**
 	 * 测试一级缓存
 	 * 知识点:
-	 * 	1.和hibernate一样事session级别的
+	 * 	1.和hibernate一样事session级别的,自动存在
 	 * 	2.每次更新 插入 删除提交事务后，会自动清除一级缓存，为了确保缓存中是最新的
 	 * 	3.扩展：在开发中 事务一般由service层控制，一个service是一个事务(即一个SqlSession)，所以一级缓存在实际开发中只在一个service中有用
 	 * 
@@ -242,8 +242,50 @@ public class MapperTest {
 		OrderMapper orderMapper1 = sqlSession.getMapper(OrderMapper.class);
 		Order order1 = orderMapper1.getOrder(1);
 		
-		
 		sqlSession.close();
 	}
-	
+
+	/**
+	 * 测试二级缓存
+	 * 一.步骤:
+	 * 	1.在sqlMapConfig.xml中设置开启二级缓存总开关
+	 *  	<setting name="cacheEnabled" value="true"/>
+	 *  2.在mapper.xml设置开启该namespace下的二级缓存
+	 *  	<cache></cache>
+	 *  3.对应pojo类要实现序列化,在这里是order类
+	 *  	因为二级缓存存储可能多样化如硬盘或其他服务器，所以要实现序列化以便于反序列化取出二级缓存
+	 *  
+	 * 二.知识点扩展:
+	 * 	1.sqlSession必须close，否则不会写入到二级缓存
+	 * 	2.mapper.xml中useCache="true"的作用
+	 * 		useCache默认="true",意思是当打开二级缓存时，该条select语句使用二级缓存
+	 * 	3.mapper.xml中flushCache="true"的作用
+	 * 		flushCache默认="true",即更新时会刷新（清空）该mapper的二级缓存
+	 *  4.控制台输出的命中率信息  DEBUG [main] - Cache Hit Ratio [com.lj.mybatis.mapper.OrderMapper]: 0.5
+	 * 
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	@Test
+	public void test11() throws Exception {
+		SqlSession sqlSession1 = sqlSessionFactory.openSession();
+		SqlSession sqlSession2 = sqlSessionFactory.openSession();
+		SqlSession sqlSession3 = sqlSessionFactory.openSession();
+		
+		OrderMapper orderMapper = sqlSession1.getMapper(OrderMapper.class);
+		Order order = orderMapper.getOrder(1);
+		sqlSession1.close();
+		
+		OrderMapper orderMapper2 = sqlSession3.getMapper(OrderMapper.class);
+		Order order2 = orderMapper2.getOrder(1);
+		order2.setOrderNo("22No");
+		orderMapper2.updateOrder(order);
+		sqlSession3.commit();
+		sqlSession3.close();
+		
+		OrderMapper orderMapper1 = sqlSession2.getMapper(OrderMapper.class);
+		Order order1 = orderMapper1.getOrder(1);
+		sqlSession2.close();
+	}
 }

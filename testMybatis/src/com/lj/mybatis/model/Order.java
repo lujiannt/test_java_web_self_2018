@@ -1,9 +1,10 @@
 package com.lj.mybatis.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable{
 	protected int id;
 	protected String orderNo;
 	protected Date createTime;

@@ -4,6 +4,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lj.mybatis.mapper.OrderMapper">
+	<!-- 该mapper开启二级缓存，作用域看namespace，若有个其他mapper也是这个namespace，那么也会开启二级缓存 -->
+	<cache></cache>
+	
 	<sql id="order_update_sql">
 		<if test="orderNo != null and orderNo !=''">
 			orderNo = #{orderNo},
@@ -123,7 +126,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			mb_order
 	</select>
 	
-	<select id="getOrder" parameterType="int" resultType="com.lj.mybatis.model.Order">
+	<!--  useCache默认="true",意思是当打开二级缓存时，该条select语句使用二级缓存 -->
+	<select id="getOrder" parameterType="int" resultType="com.lj.mybatis.model.Order" useCache="true">
 		select 
 			*
 		from 
@@ -132,7 +136,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			id = #{id}	
 	</select>
 	
-	<update id="updateOrder" parameterType="com.lj.mybatis.model.Order">
+	<!-- flushCache默认="true",即更新时会刷新（清空）该mapper的二级缓存 -->
+	<update id="updateOrder" parameterType="com.lj.mybatis.model.Order" flushCache="true">
 		update mb_order 
 		<set>
 			<include refid="order_update_sql"></include>
