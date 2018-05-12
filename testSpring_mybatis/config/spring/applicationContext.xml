@@ -44,8 +44,30 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
-	<!-- javabean配置 -->
+	<!-- dao_javabean配置 -->
 	<bean id="userDao" class="com.lj.dao.UserDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- mapper_简单配置 
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.lj.mapper.UserMapper"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	-->
+	
+	<!-- mapper扫描包配置 （上述配置需要配置多个mapper，很麻烦）
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.lj.mapper"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>-->
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 指定扫描的包名 
+		如果扫描多个包，每个包中间使用半角逗号分隔
+		-->
+		<property name="basePackage" value="com.lj.mapper"/>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+		
 	</bean>
 </beans>
