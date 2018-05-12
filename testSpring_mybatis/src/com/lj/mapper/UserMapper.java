@@ -10,6 +10,7 @@ import com.lj.model.User;
  */
 public interface UserMapper {
 	//相当于节省了写dao层实现，mybatis会自动生成执行
+	//开发规范：
 	//1.userMapper.xml中namespace要对应该mapper全名
 	//2.方法名和userMapper.xml中的id要一致
 	//3.方法返回值要一致
