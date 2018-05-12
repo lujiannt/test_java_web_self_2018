@@ -264,7 +264,7 @@ public class MapperTest {
 	 *  4.控制台输出的命中率信息  DEBUG [main] - Cache Hit Ratio [com.lj.mybatis.mapper.OrderMapper]: 0.5
 	 *  
 	 * 三.整合ehcache:
-	 * 	1.本质:mybatis本身的缓存机制并不是多么优秀，第三方的更专业优秀效率安全等都更好。
+	 * 	1.本质:mybatis本身的缓存机制并不是多么优秀，第三方的更专业优秀效率安全等都更好（比如对缓存数据的优化如数据压缩等）。
 	 * 		    但是mybatis提供了cache接口让用户自己实现或引用第三方(核心)，并且mybatis自己有默认实现的cache类
 	 * 	2.整合步骤:
 	 * 		1.引入ehcache相关jar包
