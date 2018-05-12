@@ -217,4 +217,33 @@ public class MapperTest {
 		sqlSession.close();
 	}
 	
+	/**
+	 * 测试一级缓存
+	 * 知识点:
+	 * 	1.和hibernate一样事session级别的
+	 * 	2.每次更新 插入 删除提交事务后，会自动清除一级缓存，为了确保缓存中是最新的
+	 * 	3.扩展：在开发中 事务一般由service层控制，一个service是一个事务(即一个SqlSession)，所以一级缓存在实际开发中只在一个service中有用
+	 * 
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	@Test
+	public void test10() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+		Order order = orderMapper.getOrder(1);
+		
+//		order.setOrderNo("22No");
+//		orderMapper.updateOrder(order);
+//		sqlSession.commit();
+		
+		OrderMapper orderMapper1 = sqlSession.getMapper(OrderMapper.class);
+		Order order1 = orderMapper1.getOrder(1);
+		
+		
+		sqlSession.close();
+	}
+	
 }

@@ -52,4 +52,24 @@ public interface OrderMapper {
 	 * @create 2018年5月9日
 	 */
 	List<Order> getOrdersLazy() throws Exception;
+	
+	/**
+	 * 获取order
+	 * @param orderNo
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	Order getOrder(int id) throws Exception;
+	
+	/**
+	 * 更新orderNo
+	 * @param orderNo
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月9日
+	 */
+	void updateOrder(Order order) throws Exception;
 }

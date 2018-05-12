@@ -4,6 +4,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.lj.mybatis.mapper.OrderMapper">
+	<sql id="order_update_sql">
+		<if test="orderNo != null and orderNo !=''">
+			orderNo = #{orderNo},
+		</if>
+		<if test="createTime != null and createTime !=''">
+			createTime = #{createTime},
+		</if>
+	</sql>
+
 	<!-- one2one -->
 	<resultMap id="orderResulstMapOne2one" type="com.lj.mybatis.model.Order">
 		<id column="id" property="id"/>
@@ -114,6 +123,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			mb_order
 	</select>
 	
+	<select id="getOrder" parameterType="int" resultType="com.lj.mybatis.model.Order">
+		select 
+			*
+		from 
+			mb_order
+		where 
+			id = #{id}	
+	</select>
+	
+	<update id="updateOrder" parameterType="com.lj.mybatis.model.Order">
+		update mb_order 
+		<set>
+			<include refid="order_update_sql"></include>
+		</set>
+		where 
+			id = #{id}
+	</update>
 	
 </mapper>
 
