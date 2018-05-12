@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 经过测试 order默认值="AFTER"，并且 SELECT @@IDENTITY AS id函数一样使用-->
 	<insert id="insertUser" parameterType="com.lj.mybatis.model.User">
 		insert into mb_user(userName,age) values (#{userName},#{age})
-		<selectKey  keyProperty="id"  resultType="int">
+		<selectKey  keyProperty="id"  resultType="int" order="AFTER">
 			SELECT @@IDENTITY AS id
 		</selectKey>
 	</insert>
