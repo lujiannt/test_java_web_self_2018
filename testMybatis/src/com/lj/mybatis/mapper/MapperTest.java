@@ -210,9 +210,9 @@ public class MapperTest {
 		
 		OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
 		List<Order> list = orderMapper.getOrdersLazy();
-		for(Order o : list) {
-			System.out.println(o.toString());
-		}
+//		for(Order o : list) {
+//			System.out.println(o.toString());
+//		}
 		
 		sqlSession.close();
 	}

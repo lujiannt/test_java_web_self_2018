@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="orderNo" property="orderNo"/>
 		<result column="createTime" property="createTime"/>
 		
-		<association property="user" javaType="com.lj.mybatis.model.User" column="user_id" select="com.lj.mybatis.mapper.UserMapper.getUserById"  autoMapping="true">
+		<association fetchType="lazy" property="user" javaType="com.lj.mybatis.model.User" column="user_id" select="com.lj.mybatis.mapper.UserMapper.getUserById"  autoMapping="true">
 		</association> 
 	</resultMap>
 	
