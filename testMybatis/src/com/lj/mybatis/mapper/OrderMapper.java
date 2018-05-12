@@ -64,7 +64,7 @@ public interface OrderMapper {
 	Order getOrder(int id) throws Exception;
 	
 	/**
-	 * 更新orderNo
+	 * 更新order
 	 * @param orderNo
 	 * @return
 	 * @throws Exception
