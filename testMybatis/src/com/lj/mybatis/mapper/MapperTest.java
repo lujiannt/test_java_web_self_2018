@@ -200,6 +200,22 @@ public class MapperTest {
 	
 	/**
 	 * 测试延迟加载
+	 * 步骤:
+	 * 	1.	<!-- config.xml中开启延迟加载,关闭积极延迟加载 -->
+	 *		<setting name="lazyLoadingEnabled" value="true"/>
+	 *		<setting name="aggressiveLazyLoading" value="false"/>
+	 *	2.	<!-- mapper.xml中配置延迟加载 -->
+	 *		<resultMap id="ordersLazyMap" type="com.lj.mybatis.model.Order">
+	 *			<id column="id" property="id"/>
+	 *			<result column="user_id" property="userId"/>
+	 *			<result column="orderNo" property="orderNo"/>
+	 *			<result column="createTime" property="createTime"/>
+	 *			
+	 *			<!--fetchType不设置默认也是lazy，autoMapping不填默认也是true（但在上面一对一，一对多中不是true。这里估计是因为设置了column 和 select，所以autoMapping默认为true）  -->
+     *			<association property="user" javaType="com.lj.mybatis.model.User" column="user_id" select="com.lj.mybatis.mapper.UserMapper.getUserById"  fetchType="lazy" autoMapping="true">
+	 *			</association> 
+	 *		</resultMap>
+	 * 
 	 * @throws Exception
 	 * @author lujian
 	 * @create 2018年5月9日
