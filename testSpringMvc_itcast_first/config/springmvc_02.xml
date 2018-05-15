@@ -22,7 +22,7 @@
 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<!-- key是访问路径，后面值是controller的id,可以与上面那种共存-->
+				<!-- key是访问路径，后面值是controller的id,可以与上面那种共存，也可以多个共存指向同个controller-->
 				<prop key="/user2">user1</prop>
 				<prop key="/user3">user1</prop>
 				<prop key="/user4">user2</prop>
