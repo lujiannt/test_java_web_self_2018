@@ -16,6 +16,7 @@ import com.lj.model.User;
  * @create 2018年5月15日
  * @version 1.0
  */
+@RequestMapping("/user")
 @Controller
 public class UserController_03{
 	
