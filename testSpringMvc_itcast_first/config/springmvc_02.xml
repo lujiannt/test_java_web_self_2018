@@ -16,10 +16,10 @@
 	<!-- 非注解 _映射器 _适配器-->
 	
 	<!-- 配置handler（controller） -->
-	<bean id="user1" name="/user1" class="com.lj.controller.UserController_01" />
+	<bean id="user1" class="com.lj.controller.UserController_01" />
 	<bean id="user2" class="com.lj.controller.UserController_02" />
 	
-	<!--简单url映射  -->
+	<!--简单url映射 ,这种会覆盖掉上面的（上面的name中指定路径就无效了，但是id有效，因为这里要用） -->
 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>

@@ -33,7 +33,7 @@ public class UserController_02 implements HttpRequestHandler{
 		userList.add(new User(3, "王五", 31, new Date()));
 		
 		request.setAttribute("userList", userList);
-		request.getRequestDispatcher("/WEB-INF/jsp/user/user_list.jsp").forward(request, response);
+		request.getRequestDispatcher("user/user_list").forward(request, response);
 	}
 
 
