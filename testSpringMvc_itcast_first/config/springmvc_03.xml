@@ -16,10 +16,10 @@
 	<!-- 注解 _基本配置 -->
 	
 	<!-- 单独配置controller 
-	<bean class="com.lj.controller.UserController_03"/>
+	<bean class="com.lj.controller.annotation.UserController_03"/>
 	 -->
 	<!-- 配置扫描包下的controller，这样就可以不用上面单独配置那样一个一个配置了 -->
-	<context:component-scan base-package="com.lj.controller"></context:component-scan>
+	<context:component-scan base-package="com.lj.controller.annotation"></context:component-scan>
 	
 	<!--
 	注解映射器:

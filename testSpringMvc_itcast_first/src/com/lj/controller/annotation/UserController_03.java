@@ -1,4 +1,4 @@
-package com.lj.controller;
+package com.lj.controller.annotation;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,11 +19,13 @@ import com.lj.model.User;
 @Controller
 public class UserController_03{
 	
-	@RequestMapping("userlistByAn")
+	@RequestMapping("userlist_annotaion")
 	public ModelAndView user_list(){
+		//1.未配置视图解析器前后缀
 		//ModelAndView view = new ModelAndView("/WEB-INF/jsp/user/user_list.jsp");
-		//配置完视图解析器后
+		//2.配置完视图解析器前后缀后
 		ModelAndView view = new ModelAndView("user/user_list");
+		
 		
 		List<User> userList = new ArrayList<User>();
 		userList.add(new User(1, "张三", 11, new Date()));
