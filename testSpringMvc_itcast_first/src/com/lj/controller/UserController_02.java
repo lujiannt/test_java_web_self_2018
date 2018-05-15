@@ -16,6 +16,7 @@ import com.lj.model.User;
 public class UserController_02 implements HttpRequestHandler{
 	
 	/**
+	 * 使用另一个非注解的适配器 
 	 * 这种方法可以处理返回json格式等特殊要求
 	 * @param request
 	 * @param response
