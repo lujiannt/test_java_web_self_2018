@@ -101,7 +101,7 @@
 	<a href="i18/testI18n_1">国际化测试链接</a>
 	
 	<h3>文件操作</h3>
-	<a href="user/openToTestUpload">国际化测试链接</a>
+	<a href="user/openToTestUpload">文件操作测试链接</a>
 	
 </body>
 </html>
