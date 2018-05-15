@@ -50,6 +50,7 @@
 	
 	<a href="user/user_view/1,张三">链接传参1</a><br>
 	<a href="user/user_view?name=zhangsan">链接传参2</a><br>
+	<a href="user/user_view3?name=lisi&id=4">链接传参3</a><br>
 	<a href="user/getCookieValue">获取cookieValue</a><br>
 	<a href="user/getHeaderValue">获取RequestHeader中相关信息</a><br>
 	<a href="user/testModelAndView/高锡">modelAndView测试</a><br>

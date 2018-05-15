@@ -70,6 +70,23 @@ public class UserController {
 	}
 	
 	/**
+	 * 通过httpRequest获得参数
+	 * 亚东双至实际项目中使用
+	 * @param id
+	 * @param name
+	 * @return
+	 * @author lujian
+	 * @create 2017年5月3日
+	 */
+	@RequestMapping(value="/user_view3")
+	public String getUser3(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		System.out.println(id + "   " + name);
+		return "user_view";
+	}
+	
+	/**
 	 * 通过链接访问该方法，参数注入获得参数 2
 	 * requestMapping无需添加变量传值
 	 * 使用了该注解  @RequestParam(value="") 注入参数
