@@ -18,8 +18,8 @@
 	<!-- 配置扫描包下的controller，这样就可以不用03中那样单独配置那样一个一个配置了 -->
 	<context:component-scan base-package="com.lj.controller.annotation"/>
 	
-	<!--注解驱动，这个可以代替03中的注解映射器和适配器，并且默认加载很多的参数绑定方法
-	<mvc:annotation-driven/>-->
+	<!--注解驱动，这个可以代替03中的注解映射器和适配器，并且默认加载很多的参数绑定方法-->
+	<mvc:annotation-driven/>
 		
 	<!-- 视图解析器-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
