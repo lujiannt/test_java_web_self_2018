@@ -19,7 +19,7 @@
 	<context:component-scan base-package="com.lj.controller.annotation"/>
 	
 	<!-- 获取静态资源(要获取静态资源如js，css,html等) -->
-    <mvc:default-servlet-handler/>   
+	<mvc:default-servlet-handler/>   
 	<!--注解驱动，这个可以代替03中的注解映射器和适配器，并且默认加载很多的参数绑定方法-->
 	<mvc:annotation-driven/>
 		
