@@ -21,7 +21,9 @@ public class UserController_03{
 	
 	@RequestMapping("userlistByAn")
 	public ModelAndView user_list(){
-		ModelAndView view = new ModelAndView("/WEB-INF/jsp/user/user_list.jsp");
+		//ModelAndView view = new ModelAndView("/WEB-INF/jsp/user/user_list.jsp");
+		//配置完视图解析器后
+		ModelAndView view = new ModelAndView("user/user_list");
 		
 		List<User> userList = new ArrayList<User>();
 		userList.add(new User(1, "张三", 11, new Date()));
