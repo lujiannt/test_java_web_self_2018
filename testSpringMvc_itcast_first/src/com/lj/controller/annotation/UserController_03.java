@@ -19,7 +19,7 @@ import com.lj.model.User;
 @Controller
 public class UserController_03{
 	
-	@RequestMapping("userlist_annotaion")
+	@RequestMapping("/userlist_annotaion")
 	public ModelAndView user_list(){
 		//1.未配置视图解析器前后缀
 		//ModelAndView view = new ModelAndView("/WEB-INF/jsp/user/user_list.jsp");

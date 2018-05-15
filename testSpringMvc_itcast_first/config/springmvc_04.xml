@@ -13,16 +13,13 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
-	<!-- 注解 _基本配置 -->
+	<!-- 注解 _进阶配置 -->
 	
-	<!-- 单独配置controller --> 
-	<bean class="com.lj.controller.annotation.UserController_03"/>
+	<!-- 配置扫描包下的controller，这样就可以不用03中那样单独配置那样一个一个配置了 -->
+	<context:component-scan base-package="com.lj.controller.annotation"/>
 	
-	<!--注解映射器:-->
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
-	<!--注解适配器:-->
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
-	<!--注解的映射器和适配器要配对使用，即上述两个要都用，例:不可以用一个注解的适配器加上一个非注解的映射器-->
+	<!--注解驱动，这个可以代替03中的注解映射器和适配器，并且默认加载很多的参数绑定方法-->
+	<mvc:annotation-driven/>
 		
 	<!-- 视图解析器-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
