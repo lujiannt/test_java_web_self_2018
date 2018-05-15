@@ -14,7 +14,7 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 	
 	<!-- 配置handler（controller） -->
-	<bean id="user1" name="/user1.action" class="com.lj.controller.UserController_01" />
+	<bean id="user1" name="/user1" class="com.lj.controller.UserController_01" />
 	
 	<!-- 处理器映射器  handlerMapping-->
 	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
