@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="TestSpringMvc">
+    <wb-module deploy-name="TestSpringMvc_Myself">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="TestSpringMvc"/>
-        <property name="java-output-path" value="/TestSpringMvc/build/classes"/>
+        <property name="java-output-path" value="/TestSpringMvc_Myself/build/classes"/>
+        <property name="context-root" value="TestSpringMvc_Myself"/>
     </wb-module>
 </project-modules>
