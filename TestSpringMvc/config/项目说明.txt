@@ -1,0 +1,5 @@
+该项目基于大神博客自学的springMvc annotation知识。
+
+	
+学习顺序： hellocontroller 、  userController 、CurdController 、 i18nController
+配置顺序:web.xml  springMvc.xml
