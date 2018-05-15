@@ -30,9 +30,6 @@
 		</property>
 	</bean>
 	
-	<!-- 处理器映射器  handlerMapping-->
-	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
-	
 	<!-- 处理器适配器  handlerAdaptor （执行handler）-->
 	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
 	<!-- 另一个非注解的适配器 -->

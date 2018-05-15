@@ -33,11 +33,6 @@ public class UserController_02 implements HttpRequestHandler{
 		
 		request.setAttribute("userList", userList);
 		request.getRequestDispatcher("/WEB-INF/jsp/user/user_list.jsp").forward(request, response);
-
-//		重要：
-//		response.setCharacterEncoding("utf-8");
-//		response.setContentType("application/json;charset=utf-8");
-//		response.getWriter().write("json串");
 	}
 
 
