@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lj.ssm.model.UserCustom;
@@ -48,7 +49,7 @@ public class UserController {
 	
 	
 	// 知识点总结：
-	// 	一.返回值主要有三种类型
+	// 	一.返回值（主要有三种类型）
 	//		1.ModelAndView  
 	//		2.String - 使用Model或其他参数等方法传值到前台   
 	//		3.void - 可用于返回json等
@@ -57,6 +58,17 @@ public class UserController {
 	 * 跳转到编辑用户页面
 	 * 	1.用参数Model传值
 	 * 	2.返回值为string
+	 *  3.默认支持的参数 
+	 *  	①httpServletRequst 
+	 *  	②httpServletResponse 
+	 *  	③HttpSession 
+	 *  	④Model/ModelMap
+	 *  4.简单参数
+	 *  	①当请求参数和这里方法中形参名一样时，可以直接获取（springMvc自带很多类型转换器组件，对于简单类型转换没问题）
+	 *  	②当形参名与请求参数不一致时，使用该注解：@RequestParam 
+	 *  		value  请求参数名
+	 *  		required 可不可空
+	 *  		defaultValue 默认值
 	 * @param model
 	 * @return
 	 * @throws Exception
@@ -64,9 +76,12 @@ public class UserController {
 	 * @create 2018年5月16日
 	 */
 	@RequestMapping("/user_openToEdit")
-	public String user_openToEdit(Model model) throws Exception {
+	//1.请求参数和这里方法中形参名一样时:
+	//public String user_openToEdit(Model model, int id) throws Exception {
+	//2.请求参数和这里方法中形参名不一样时-@RequestParam
+	public String user_openToEdit(Model model, @RequestParam(value="id", required=true, defaultValue="1") int id1) throws Exception {
 		
-		UserCustom userCustom = userService.findUserById(1);
+		UserCustom userCustom = userService.findUserById(id1);
 		model.addAttribute("userCustom", userCustom);
 		
 		return "user/user_edit";
@@ -84,7 +99,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/user_edit",method={RequestMethod.POST})
 	public String user_edit(HttpServletRequest request) throws Exception {
-		//UserCustom userCustom = userService.updateUser(id, userCustom);
+//		UserCustom userCustom = userService.updateUser(id, userCustom);
 		
 		//转发
 		return "forward:user_list";
