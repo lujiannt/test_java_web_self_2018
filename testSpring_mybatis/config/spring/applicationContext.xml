@@ -58,6 +58,8 @@
 	
 	<!-- mapper扫描包配置 （上述配置需要配置多个mapper，很麻烦）这里也要遵循mapper代理开发的规范-->
 	<!-- 
+		//扫描规范
+		//1.mapper.xml文件名和mapper文件一致，并且在同一个包中
 		//开发规范：
 		//1.userMapper.xml中namespace要对应该mapper全名
 		//2.方法名和userMapper.xml中的id要一致
