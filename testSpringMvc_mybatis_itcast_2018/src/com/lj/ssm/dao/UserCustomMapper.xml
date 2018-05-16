@@ -59,6 +59,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{id}
 		</foreach> 
 	</delete>
+	
+	<delete id="deleteUserForBatchLogic1"  parameterType="com.lj.ssm.model.UserVo">
+		update ssm_user 
+		<set>
+			status = 0
+		</set>
+		where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach> 
+	</delete>
 </mapper>
 
 

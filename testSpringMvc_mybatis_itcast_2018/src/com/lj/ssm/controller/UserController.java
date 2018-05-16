@@ -1,5 +1,6 @@
 package com.lj.ssm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -169,7 +170,7 @@ public class UserController {
 	}
 	
 	/**
-	 * 批量逻辑删除
+	 * 批量逻辑删除_数组
 	 * 	注意:这边要注意xml中 parameterType 和 conllection的写法
 	 * @param ids
 	 * @return
@@ -184,6 +185,24 @@ public class UserController {
 			userService.deleteUserForBatch(ids);
 		}
 
+		//转发
+		return "forward:user_list";
+	}
+	
+	/**
+	 * 批量逻辑删除_list
+	 * 	注意:这边要注意xml中 parameterType 和 conllection的写法
+	 * @param ids
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	@RequestMapping(value="/user_deleteBatch_list")
+	public String user_deleteBatch1(UserVo userVo) throws Exception {
+		
+		userService.deleteUserForBatch1(userVo);
+		
 		//转发
 		return "forward:user_list";
 	}

@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	/**
-	 * 批量删除user
+	 * 批量删除user_数组
 	 * @throws Exception
 	 * @author lujian
 	 * @create 2018年5月16日
@@ -61,6 +61,17 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void deleteUserForBatch(int[] ids) throws Exception {
 		userCustomMapper.deleteUserForBatchLogic(ids);
+	}
+	
+	/**
+	 * 批量删除user_list
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	@Override
+	public void deleteUserForBatch1(UserVo userVo) throws Exception {
+		userCustomMapper.deleteUserForBatchLogic1(userVo);
 	}
 
 }

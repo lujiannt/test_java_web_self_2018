@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>查询用户品列表</title>
-
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 	function deleteBatch() {
 		document.myForm.action="${pageContext.request.contextPath }/user/user_deleteBatch";
@@ -17,6 +17,12 @@
 		//$("#myform").attr('action',newUrl);    //通过jquery为action属性赋值
        	//$("#myform").submit();    //提交ID为myform的表单
 	}
+	
+	function deleteBatch1() {
+		
+		document.myForm.action="${pageContext.request.contextPath }/user/user_deleteBatch_list";
+		document.myForm.submit();
+	}
 
 </script>
 
@@ -25,14 +31,15 @@
 
 </head>
 <body> 
-<form name="myForm" action="${pageContext.request.contextPath }/user/user_list" method="post">
+<form name="myForm" id="myForm" action="${pageContext.request.contextPath }/user/user_list" method="post">
 查询条件：
 <table width="100%" border=1>
 <tr>
 <td>姓名：<input value="${userVo.userCustom.userName }" name="userCustom.userName" /></td>
 <td>年龄：<input value="${userVo.userCustom.age }" name="userCustom.age" /></td>
 <td><input type="submit" value="查询"/>
-<input type="button" value="批量删除" onclick="deleteBatch()"/></td>
+<input type="button" value="批量删除_数组" onclick="deleteBatch()"/></td>
+<input type="button" value="批量删除_list" onclick="deleteBatch1()"/></td>
 </tr>
 </table>
 
