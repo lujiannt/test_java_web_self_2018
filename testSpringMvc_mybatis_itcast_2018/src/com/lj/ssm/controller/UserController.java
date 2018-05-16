@@ -1,7 +1,6 @@
 package com.lj.ssm.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,7 +36,7 @@ public class UserController {
 		ModelAndView view = new ModelAndView("user/user_list");
 		
 		//测试下面方法中的返回  forward:
-		System.out.println(request.getParameter("id"));
+		//System.out.println(request.getParameter("id"));
 		
 		List<UserCustom> userList = userService.findUserByCondition(userVo);
 		view.addObject("userList", userList);
