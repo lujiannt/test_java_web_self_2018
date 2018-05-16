@@ -3,7 +3,12 @@ package com.lj.ssm.model;
 import java.util.Date;
 
 public class User {
+	public static final short STATUS_DELETE = 0;
+	public static final short STATUS_NORMAL = 1;
+	
 	private int id;
+	/*0:已删除 1：正常*/
+	private short status;
 	private String userName;
 	private Integer age;
 	private Date createTime;
@@ -13,6 +18,18 @@ public class User {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public short getStatus() {
+		return status;
+	}
+	public void setStatus(short status) {
+		this.status = status;
+	}
+	public static short getStatusDelete() {
+		return STATUS_DELETE;
+	}
+	public static short getStatusNormal() {
+		return STATUS_NORMAL;
 	}
 	public String getUserName() {
 		return userName;

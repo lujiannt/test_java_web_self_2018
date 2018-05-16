@@ -47,6 +47,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		where id = #{id}
 	</update>
+	
+	<delete id="updateUserLogic"  parameterType="list">
+			
+	</delete>
 </mapper>
 
 
