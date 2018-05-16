@@ -7,7 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>查询用户品列表</title>
-<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<!--引入官网js <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<script src="${pageContext.request.contextPath }/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 	function deleteBatch() {
 		document.myForm.action="${pageContext.request.contextPath }/user/user_deleteBatch";
@@ -20,8 +21,8 @@
 	
 	function deleteBatch1() {
 		
-		document.myForm.action="${pageContext.request.contextPath }/user/user_deleteBatch_list";
-		document.myForm.submit();
+		$("#myForm").attr('action',"${pageContext.request.contextPath }/user/user_deleteBatch_list");    //通过jquery为action属性赋值
+       	$("#myForm").submit();    //提交ID为myform的表单
 	}
 
 </script>
