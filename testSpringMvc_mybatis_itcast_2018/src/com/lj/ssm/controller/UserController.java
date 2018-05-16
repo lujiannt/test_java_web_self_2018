@@ -45,6 +45,14 @@ public class UserController {
 		return view;
 	}
 	
+	
+	
+	// 知识点总结：
+	// 	一.返回值主要有三种类型
+	//		1.ModelAndView  
+	//		2.String - 使用Model或其他参数等方法传值到前台   
+	//		3.void - 可用于返回json等
+	
 	/**
 	 * 跳转到编辑用户页面
 	 * 	1.用参数Model传值
