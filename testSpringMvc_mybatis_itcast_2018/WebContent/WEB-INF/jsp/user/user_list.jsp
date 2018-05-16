@@ -7,22 +7,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>查询用户品列表</title>
+
+<script type="text/javascript">
+	function deleteBatch() {
+		document.myForm.action="${pageContext.request.contextPath }/user/user_deleteBatch";
+		document.myForm.submit();
+		
+		//jquery方法。这里没有引入js，就不用了
+		//$("#myform").attr('action',newUrl);    //通过jquery为action属性赋值
+       	//$("#myform").submit();    //提交ID为myform的表单
+	}
+
+</script>
+
+<style type="text/css">
+</style>
+
 </head>
 <body> 
-<form action="${pageContext.request.contextPath }/user/user_list" method="post">
+<form name="myForm" action="${pageContext.request.contextPath }/user/user_list" method="post">
 查询条件：
 <table width="100%" border=1>
 <tr>
 <td>姓名：<input value="${userVo.userCustom.userName }" name="userCustom.userName" /></td>
 <td>年龄：<input value="${userVo.userCustom.age }" name="userCustom.age" /></td>
-<td><input type="submit" value="查询"/></td>
+<td><input type="submit" value="查询"/>
+<input type="button" value="批量删除" onclick="deleteBatch()"/></td>
 </tr>
 </table>
-</form>
+
 
 商品列表：
 <table width="100%" border=1>
 <tr>
+	<td>选择</td>
 	<td>id</td>
 	<td>名称</td>
 	<td>年龄</td>
@@ -31,6 +49,7 @@
 </tr>
 <c:forEach items="${userList }" var="user">
 <tr>
+	<td><input type="checkBox" name="ids" value="${user.id }"></td>
 	<td>${user.id }</td>
 	<td>${user.userName }</td>
 	<td>${user.age }</td>
@@ -41,7 +60,7 @@
 </c:forEach>
 
 </table>
-
+</form>
 </body>
 
 </html>

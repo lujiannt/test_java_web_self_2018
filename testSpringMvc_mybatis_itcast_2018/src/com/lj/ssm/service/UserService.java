@@ -34,4 +34,12 @@ public interface UserService {
 	 * @create 2018年5月16日
 	 */
 	void updateUser(int id, UserCustom userCustom) throws Exception;
+	
+	/**
+	 * 批量删除user
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	void deleteUserForBatch(int[] ids) throws Exception;
 }

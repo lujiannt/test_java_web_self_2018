@@ -34,4 +34,13 @@ public interface UserCustomMapper {
 	 * @create 2018年5月16日
 	 */
 	void updateUser(UserCustom userCustom) throws Exception;
+	
+	/**
+	 * 批量逻辑删除user
+	 * @param ids
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	void deleteUserForBatchLogic(int[] ids) throws Exception;
 }

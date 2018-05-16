@@ -1,0 +1,18 @@
+.Wdate{
+	border:#d1d1d1 1px solid;
+	height:29px;
+	width:150px;
+	background:#fff url(datePicker.gif) no-repeat right;
+	border-radius: 4px;
+	padding: 0px 10px;
+}
+.Wdate:hover {
+  border: 1px solid #33C3F0;
+  outline: 0; }
+.Wdate:focus {
+  border: 1px solid #33C3F0;
+  outline: 0; }
+.WdateFmtErr{
+	font-weight:bold;
+	color:red;
+}

@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.lj.ssm.dao.UserCustomMapper">
 	<sql id="user_query_sql">
+		status = 1
 		<if test="userCustom != null">
 			<if test="userCustom.userName != null and userCustom.userName != ''">
 				and userName LIKE '%${userCustom.userName}%'
@@ -48,8 +49,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where id = #{id}
 	</update>
 	
-	<delete id="updateUserLogic"  parameterType="list">
-			
+	<delete id="deleteUserForBatchLogic"  parameterType="int[]">
+		update ssm_user 
+		<set>
+			status = 0
+		</set>
+		where id in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach> 
 	</delete>
 </mapper>
 

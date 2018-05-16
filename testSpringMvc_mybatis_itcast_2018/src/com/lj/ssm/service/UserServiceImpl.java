@@ -51,5 +51,16 @@ public class UserServiceImpl implements UserService{
 		}
 		userCustomMapper.updateUser(userCustom);
 	}
+	
+	/**
+	 * 批量删除user
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	@Override
+	public void deleteUserForBatch(int[] ids) throws Exception {
+		userCustomMapper.deleteUserForBatchLogic(ids);
+	}
 
 }

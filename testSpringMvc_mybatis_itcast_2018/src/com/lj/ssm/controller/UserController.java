@@ -167,4 +167,24 @@ public class UserController {
 		//重定向
 		//return "redirect:user_list";
 	}
+	
+	/**
+	 * 批量逻辑删除
+	 * 	注意:这边要注意xml中 parameterType 和 conllection的写法
+	 * @param ids
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	@RequestMapping(value="/user_deleteBatch")
+	public String user_deleteBatch(int[] ids) throws Exception {
+		
+		if(ids.length > 0) {
+			userService.deleteUserForBatch(ids);
+		}
+
+		//转发
+		return "forward:user_list";
+	}
 }
