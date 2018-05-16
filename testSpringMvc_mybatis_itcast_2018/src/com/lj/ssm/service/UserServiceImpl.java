@@ -24,5 +24,32 @@ public class UserServiceImpl implements UserService{
 	public List<UserCustom> findUserByCondition(UserVo userVo) throws Exception {
 		return userCustomMapper.findUserByCondition(userVo);
 	}
+	
+	/**
+	 * 根据id查询UserCustom
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	@Override
+	public UserCustom findUserById(int id) throws Exception {
+		return userCustomMapper.findUserById(id);
+	}
+	
+	/**
+	 * 修改user
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	@Override
+	public void updateUser(int id, UserCustom userCustom) throws Exception {
+		if(id!=0) {
+			userCustom.setId(id);
+		}
+		userCustomMapper.updateUser(userCustom);
+	}
 
 }

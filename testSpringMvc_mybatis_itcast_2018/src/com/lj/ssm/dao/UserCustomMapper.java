@@ -16,4 +16,22 @@ public interface UserCustomMapper {
 	 * @create 2018年5月16日
 	 */
 	List<UserCustom> findUserByCondition(UserVo userVo) throws Exception;
+	
+	/**
+	 * 根据id查询UserCustom
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	UserCustom findUserById(int id) throws Exception;
+	
+	/**
+	 * 修改user
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	void updateUser(UserCustom userCustom) throws Exception;
 }

@@ -31,7 +31,7 @@
 	<td>${user.userName }</td>
 	<td>${user.age }</td>
 	<td><fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-	<td><a href="">修改</a></td>
+	<td><a href="${pageContext.request.contextPath }/user/user_openToEdit">修改</a></td>
 
 </tr>
 </c:forEach>
