@@ -58,7 +58,7 @@ public class UserController {
 	//		1.ModelAndView  
 	//		2.String - 使用Model或其他参数等方法传值到前台   
 	//		3.void - 可用于返回json等
-	//	二.绑定参数
+	//	二.参数绑定
 	//		1.默认支持的参数 （springMvc在前端控制器中已经获得到这些参数，如在servletDispatcher中已经获得request，它可以直接赋值到方法中）
 	//   		①httpServletRequst 
 	//   		②httpServletResponse 
@@ -100,6 +100,19 @@ public class UserController {
 	//					return null;
 	//				}
 	//			}
+	//
+	//	三.springMvc和Struts2的区别
+	//	springMvc:	
+	//		1.springMvc是基于方法的开发
+	//			通过url和controller映射，创建一个controller，并且只有一个方法
+	//		2.springMvc是通过方法形参接受参数（和service开发类似），方法结束会销毁，所以可以使用单例模式
+	//	struts2:
+	//		1.struts2是基于类的开发
+	//			生成的action中含有很多东西
+	//		2.通过action中的成员变量和get/set获取请求参数，而成员变量是共享的，所以只能用多例模式
+	//
+	//
+	
 	
 	/**
 	 * 跳转到编辑用户页面
