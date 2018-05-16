@@ -14,6 +14,7 @@ import com.lj.ssm.service.UserService;
 @RequestMapping("/user")
 @Controller
 public class UserController {
+	//@Resource也可以用
 	@Autowired
 	private UserService userService;
 	
