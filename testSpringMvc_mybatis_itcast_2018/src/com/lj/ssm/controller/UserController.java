@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,10 +66,11 @@ public class UserController {
 	 *  	④Model/ModelMap
 	 *  4.简单参数（springMvc自带很多类型转换器组件，对于简单类型转换没问题）
 	 *  	①当请求参数和这里方法中形参名一样时，可以直接获取
-	 *  	②当形参名与请求参数不一致时，使用该注解：@RequestParam 
+	 *  	②当形参名与请求参数不一致时，使用该注解：@RequestParam（还有校验和赋予默认值的功能）
 	 *  		value  请求参数名
 	 *  		required 可不可空
 	 *  		defaultValue 默认值
+	 *  	③当形参名与请求参数不一致时，也使用该注解：@PathVariable
 	 * @param model
 	 * @return
 	 * @throws Exception
