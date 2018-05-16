@@ -1,17 +1,12 @@
 package com.lj.ssm.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,17 +32,15 @@ public class UserController {
 	 * @create 2018年5月16日
 	 */
 	@RequestMapping("/user_list")
-	public ModelAndView user_list(HttpServletRequest request) throws Exception {
+	public ModelAndView user_list(HttpServletRequest request, UserVo userVo) throws Exception {
 		ModelAndView view = new ModelAndView("user/user_list");
 		
 		//测试下面方法中的返回  forward:
 		System.out.println(request.getParameter("id"));
 		
-		UserCustom userCustom = new UserCustom();
-		UserVo userVo = new UserVo();
-		userVo.setUserCustom(userCustom);
 		List<UserCustom> userList = userService.findUserByCondition(userVo);
 		view.addObject("userList", userList);
+		view.addObject("userVo", userVo);
 		return view;
 	}
 	

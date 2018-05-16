@@ -13,9 +13,13 @@
 查询条件：
 <table width="100%" border=1>
 <tr>
+<td>姓名：<input value="${userVo.userCustom.userName }" name="userCustom.userName" /></td>
+<td>年龄：<input value="${userVo.userCustom.age }" name="userCustom.age" /></td>
 <td><input type="submit" value="查询"/></td>
 </tr>
 </table>
+</form>
+
 商品列表：
 <table width="100%" border=1>
 <tr>
@@ -37,7 +41,7 @@
 </c:forEach>
 
 </table>
-</form>
+
 </body>
 
 </html>

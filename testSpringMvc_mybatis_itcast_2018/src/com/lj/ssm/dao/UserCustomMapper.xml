@@ -7,7 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="user_query_sql">
 		<if test="userCustom != null">
 			<if test="userCustom.userName != null and userCustom.userName != ''">
-				and userName LIKE '%${useCustom.userName}%'
+				and userName LIKE '%${userCustom.userName}%'
+			</if>
+			<if test="userCustom.age != null and userCustom.age != 0">
+				and age = #{userCustom.age}
 			</if>
 		</if>
 	</sql>

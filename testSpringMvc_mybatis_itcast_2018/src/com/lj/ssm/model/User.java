@@ -5,7 +5,7 @@ import java.util.Date;
 public class User {
 	private int id;
 	private String userName;
-	private int age;
+	private Integer age;
 	private Date createTime;
 	
 	public int getId() {
@@ -20,10 +20,10 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 	public Date getCreateTime() {
