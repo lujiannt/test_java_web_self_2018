@@ -1,10 +1,14 @@
 package com.lj.ssm.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,6 +58,48 @@ public class UserController {
 	//		1.ModelAndView  
 	//		2.String - 使用Model或其他参数等方法传值到前台   
 	//		3.void - 可用于返回json等
+	//	二.绑定参数
+	//		1.默认支持的参数 （springMvc在前端控制器中已经获得到这些参数，如在servletDispatcher中已经获得request，它可以直接赋值到方法中）
+	//   		①httpServletRequst 
+	//   		②httpServletResponse 
+	//  		③HttpSession 
+	//   		④Model/ModelMap
+	//   	2.简单参数（springMvc自带很多类型转换器组件，对于简单类型转换没问题）
+	//			①当请求参数和这里方法中形参名一样时，可以直接获取
+	//  		②当形参名与请求参数不一致时，使用该注解：@RequestParam（还有校验和赋予默认值的功能）
+	// 				value  请求参数名
+	// 				required 可不可空
+	//   			defaultValue 默认值
+	//  		③当形参名与请求参数不一致时，也使用该注解：@PathVariable
+	//		3.pojo类	
+	//			字段名对应时，会自动映射
+	//		4.自定义参数绑定转换器
+	//			①springMvc配置文件中配置:
+	//
+	//				<mvc:annotation-driven conversion-service="conversionService"/>
+	//			
+	//				<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	//					<property name="converters">
+	//						<list>
+	//							<bean class="com.lj.ssm.controller.converter.CustomDateConverter"/>
+	//						</list>
+	//					</property>
+	//				</bean>
+	//
+	//			②自定义参数绑定转换器代码:
+	//
+	//			public class CustomDateConverter implements Converter<String, Date>{
+	//				@Override
+	//				public Date convert(String res) {
+	//					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	//					try {
+	//						return sdf.parse(res);
+	//					} catch (ParseException e) {
+	//						e.printStackTrace();
+	//					}
+	//					return null;
+	//				}
+	//			}
 	
 	/**
 	 * 跳转到编辑用户页面
