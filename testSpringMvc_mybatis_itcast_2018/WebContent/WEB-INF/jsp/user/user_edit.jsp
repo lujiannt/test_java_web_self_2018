@@ -29,11 +29,13 @@
 	<td>性别</td>
 	<td><input type="text" name="age" value="${userCustom.age }"/></td>
 </tr>
+
 <tr>
 	<td>注册日期</td>
 	<td><input type="text" name="createTime" value="<fmt:formatDate value="${userCustom.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/></td>
 </tr>
-<%-- <tr>
+<%--
+ <tr>
 	<td>商品图片</td>
 	<td>
 		<c:if test="${items.pic !=null}">

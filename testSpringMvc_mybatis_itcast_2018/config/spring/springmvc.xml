@@ -20,7 +20,8 @@
 	<!-- 获取静态资源(要获取静态资源如js，css,html等) -->
 	<mvc:default-servlet-handler/>   
 	<!--注解驱动，这个可以代替03中的注解映射器和适配器，并且默认加载很多的参数绑定方法-->
-	<mvc:annotation-driven/>
+	<!-- conversion-service是为了加载自定义的参数转换绑定器 -->
+	<mvc:annotation-driven conversion-service="conversionService"/>
 		
 	<!-- 视图解析器-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -29,6 +30,17 @@
 		<!-- 配置路径的后缀 -->
 		<property name="suffix" value=".jsp"/>
 	</bean>	
+	
+	<!-- conversion-service是为了加载自定义的参数转换绑定器 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<!-- 转换器 -->
+		<property name="converters">
+			<list>
+				<!-- 日期类型转换 -->
+				<bean class="com.lj.ssm.controller.converter.CustomDateConverter"/>
+			</list>
+		</property>
+	</bean>
 	
 	<!-- 配置 文件上传的支持 -->  
 	<!-- 不配置此项无法上传文件，并且当form中有enctype="multipart/form-data"时，request.getparameter获取不到参数）

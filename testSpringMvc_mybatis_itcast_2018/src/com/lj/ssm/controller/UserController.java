@@ -81,9 +81,9 @@ public class UserController {
 	//1.请求参数和这里方法中形参名一样时:
 	//public String user_openToEdit(Model model, int id) throws Exception {
 	//2.请求参数和这里方法中形参名不一样时-@RequestParam
-	public String user_openToEdit(Model model, @RequestParam(value="id", required=true, defaultValue="1") int id1) throws Exception {
+	public String user_openToEdit(Model model, @RequestParam(value="id", required=true, defaultValue="1") int userId) throws Exception {
 		
-		UserCustom userCustom = userService.findUserById(id1);
+		UserCustom userCustom = userService.findUserById(userId);
 		model.addAttribute("userCustom", userCustom);
 		
 		return "user/user_edit";
@@ -93,6 +93,12 @@ public class UserController {
 	 * 跳转到编辑用户页面
 	 * 	1.指定为post
 	 * 	2.重定向/转发
+	 *  3.接受pojo类参数
+	 *  4.自定义参数绑定器
+	 *  	当页面注释掉createTime时，可以更新；当放开后，会报错，因为springMvc的转换器无法转换date
+	 *  	--因为date格式多样，如yyyy-MM-dd或者yyyy/MM/dd，springMvc无法确定
+	 *  	所以需要自定义一个Date转换器
+	 *  		拓展有时候也会创建去掉字符串前后空格的转换器
 	 * @param model
 	 * @return
 	 * @throws Exception
@@ -100,9 +106,10 @@ public class UserController {
 	 * @create 2018年5月16日
 	 */
 	@RequestMapping(value="/user_edit",method={RequestMethod.POST})
-	public String user_edit(HttpServletRequest request) throws Exception {
-//		UserCustom userCustom = userService.updateUser(id, userCustom);
+	public String user_edit(HttpServletRequest request, Integer id, UserCustom userCustom) throws Exception {
 		
+		userService.updateUser(id, userCustom);
+
 		//转发
 		return "forward:user_list";
 		//重定向

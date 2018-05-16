@@ -19,6 +19,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="age != null">
 			age = #{age},
 		</if>
+		<if test="createTime != null">
+			createTime = #{createTime},
+		</if>
 	</sql>
 	
 	<select id="findUserByCondition" parameterType="com.lj.ssm.model.UserVo" resultType="com.lj.ssm.model.UserCustom">
