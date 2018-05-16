@@ -11,6 +11,7 @@ import com.lj.ssm.model.UserCustom;
 import com.lj.ssm.model.UserVo;
 import com.lj.ssm.service.UserService;
 
+@RequestMapping("/user")
 @Controller
 public class UserController {
 	@Autowired
