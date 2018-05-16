@@ -1,6 +1,6 @@
 package cn.lj.ssm.po;
 
-public class MbUser {
+public class User {
     private Integer id;
 
     private String username;

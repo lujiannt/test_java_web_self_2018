@@ -2,7 +2,7 @@ package cn.lj.ssm.po;
 
 import java.util.Date;
 
-public class MbOrder {
+public class Order {
     private Integer id;
 
     private String orderno;

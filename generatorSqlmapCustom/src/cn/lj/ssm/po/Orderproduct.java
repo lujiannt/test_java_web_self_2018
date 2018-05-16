@@ -2,7 +2,7 @@ package cn.lj.ssm.po;
 
 import java.math.BigDecimal;
 
-public class MbOrderproduct {
+public class Orderproduct {
     private Integer id;
 
     private Integer orderid;

@@ -48,9 +48,9 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!-- 指定数据库表 -->
-		<table tableName="mb_user"></table>
-		<table tableName="mb_order"></table>
-		<table tableName="mb_orderproduct"></table>
+		<table tableName="mb_user" domainObjectName="User"></table>
+		<table tableName="mb_order" domainObjectName="Order"></table>
+		<table tableName="mb_orderproduct" domainObjectName="Orderproduct"></table>
 		<!-- <table schema="" tableName="sys_user"></table>
 		<table schema="" tableName="sys_role"></table>
 		<table schema="" tableName="sys_permission"></table>
