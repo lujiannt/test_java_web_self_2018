@@ -3,11 +3,11 @@ package com.lj.ssm.model;
 import java.util.Date;
 
 public class User {
+	/*状态常量 0:已删除 1：正常*/
 	public static final short STATUS_DELETE = 0;
 	public static final short STATUS_NORMAL = 1;
 	
 	private int id;
-	/*0:已删除 1：正常*/
 	private short status;
 	private String userName;
 	private Integer age;
