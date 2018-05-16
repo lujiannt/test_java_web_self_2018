@@ -58,13 +58,13 @@ public class UserController {
 	 * 跳转到编辑用户页面
 	 * 	1.用参数Model传值
 	 * 	2.返回值为string
-	 *  3.默认支持的参数 
+	 *  3.默认支持的参数 （springMvc在前端控制器中已经获得到这些参数，如在servletDispatcher中已经获得request，它可以直接赋值到方法中）
 	 *  	①httpServletRequst 
 	 *  	②httpServletResponse 
 	 *  	③HttpSession 
 	 *  	④Model/ModelMap
-	 *  4.简单参数
-	 *  	①当请求参数和这里方法中形参名一样时，可以直接获取（springMvc自带很多类型转换器组件，对于简单类型转换没问题）
+	 *  4.简单参数（springMvc自带很多类型转换器组件，对于简单类型转换没问题）
+	 *  	①当请求参数和这里方法中形参名一样时，可以直接获取
 	 *  	②当形参名与请求参数不一致时，使用该注解：@RequestParam 
 	 *  		value  请求参数名
 	 *  		required 可不可空
