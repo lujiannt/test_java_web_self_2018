@@ -10,7 +10,7 @@
 		</id>
 		
 		<property name="name"/>
-		<set name="products">
+		<set name="products" inverse="true" cascade="all">
 			<key column="orderId"></key>
 			<one-to-many class="com.lj.one2many.model.Product2"/>
 		</set>
