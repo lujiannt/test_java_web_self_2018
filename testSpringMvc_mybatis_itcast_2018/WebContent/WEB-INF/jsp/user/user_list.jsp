@@ -42,7 +42,7 @@
 <td>姓名：<input value="${userVo.userCustom.userName }" name="userCustom.userName" /></td>
 <td>年龄：<input value="${userVo.userCustom.age }" name="userCustom.age" /></td>
 <td><input type="submit" value="查询"/>
-<input type="button" value="批量删除_数组" onclick="deleteBatch()"/></td>
+<input type="button" value="批量删除_数组" onclick="deleteBatch()"/>
 <input type="button" value="批量删除_list" onclick="deleteBatch1()"/>
 <input type="button" value="批量修改_list" onclick="modifyBatch1()"/>
 </td>
