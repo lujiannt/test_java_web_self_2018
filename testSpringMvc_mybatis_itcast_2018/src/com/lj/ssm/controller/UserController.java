@@ -180,7 +180,7 @@ public class UserController {
 	@RequestMapping(value="/user_deleteBatch")
 	public String user_deleteBatch(int[] ids) throws Exception {
 		
-		if(ids.length > 0) {
+		if(ids != null && ids.length > 0) {
 			userService.deleteUserForBatch(ids);
 		}
 
@@ -199,7 +199,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/user_deleteBatch_list")
 	public String user_deleteBatch1(UserVo userVo) throws Exception {
-		if(userVo.getUserList().size() > 0) {
+		if(userVo.getIds() != null && userVo.getIds().size() > 0) {
 			userService.deleteUserForBatch1(userVo);
 		}
 		
