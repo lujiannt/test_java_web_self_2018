@@ -199,8 +199,9 @@ public class UserController {
 	 */
 	@RequestMapping(value="/user_deleteBatch_list")
 	public String user_deleteBatch1(UserVo userVo) throws Exception {
-		
-		userService.deleteUserForBatch1(userVo);
+		if(userVo.getUserList().size() > 0) {
+			userService.deleteUserForBatch1(userVo);
+		}
 		
 		//转发
 		return "forward:user_list";
