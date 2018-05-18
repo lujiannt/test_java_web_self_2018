@@ -11,8 +11,12 @@
 <script src="${pageContext.request.contextPath }/js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
 	function deleteBatch() {
-		document.myForm.action="${pageContext.request.contextPath }/user/user_deleteBatch";
-		document.myForm.submit();
+		
+		var size = $("input[name='ids']:checked").size();
+		if(size >= 1) {
+			document.myForm.action="${pageContext.request.contextPath }/user/user_deleteBatch";
+			document.myForm.submit();
+		}
 		
 		//jquery方法。这里没有引入js，就不用了
 		//$("#myform").attr('action',newUrl);    //通过jquery为action属性赋值
