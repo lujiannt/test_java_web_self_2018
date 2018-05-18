@@ -180,12 +180,12 @@ public class UserController {
 	@RequestMapping(value="/user_deleteBatch")
 	public String user_deleteBatch(int[] ids) throws Exception {
 		
-		if(ids != null && ids.length > 0) {
+		if(ids.length > 0) {
 			userService.deleteUserForBatch(ids);
 		}
 
 		//转发
-		return "forward:user_list";
+		return "redirect:user_list";
 	}
 	
 	/**
