@@ -24,7 +24,10 @@
 		$("#myForm").attr('action',"${pageContext.request.contextPath }/user/user_deleteBatch_list");    //通过jquery为action属性赋值
        	$("#myForm").submit();    //提交ID为myform的表单
 	}
-
+	
+	function modifyBatch1() {
+		window.location.href="${pageContext.request.contextPath }/user/user_openToEditBatch"
+	}
 </script>
 
 <style type="text/css">
@@ -40,7 +43,10 @@
 <td>年龄：<input value="${userVo.userCustom.age }" name="userCustom.age" /></td>
 <td><input type="submit" value="查询"/>
 <input type="button" value="批量删除_数组" onclick="deleteBatch()"/></td>
-<input type="button" value="批量删除_list" onclick="deleteBatch1()"/></td>
+<input type="button" value="批量删除_list" onclick="deleteBatch1()"/>
+<input type="button" value="批量修改_list" onclick="modifyBatch1()"/>
+</td>
+
 </tr>
 </table>
 

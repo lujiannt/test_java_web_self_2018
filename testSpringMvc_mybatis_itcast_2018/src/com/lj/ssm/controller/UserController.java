@@ -142,7 +142,7 @@ public class UserController {
 	}
 	
 	/**
-	 * 跳转到编辑用户页面
+	 * 编辑用户
 	 * 	1.指定为post
 	 * 	2.重定向/转发
 	 *  3.接受pojo类参数
@@ -189,7 +189,7 @@ public class UserController {
 	}
 	
 	/**
-	 * 批量逻辑删除_list
+	 * 批量逻辑删除_list<Integer>
 	 * 	注意:这边要注意xml中 parameterType 和 conllection的写法
 	 * @param ids
 	 * @return
@@ -204,5 +204,41 @@ public class UserController {
 		
 		//转发
 		return "forward:user_list";
+	}
+	
+	/**
+	 * 跳转到批量编辑用户页面_list<UserCustom>
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	@RequestMapping("/user_openToEditBatch")
+	public ModelAndView user_openToEditBatch() throws Exception {
+		ModelAndView view = new ModelAndView("user/user_editBatch");
+		
+		List<UserCustom> userList = userService.findUserByCondition(null);
+		view.addObject("userList", userList);
+		
+		return view;
+	}
+	
+	/**
+	 * 量编辑用户_list<UserCustom>
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月16日
+	 */
+	@RequestMapping("/user_editBatch")
+	public String user_editBatch(UserVo userVo) throws Exception {
+		List<UserCustom> userlist = userVo.getUserList();
+		if(userlist.size() > 0) {
+			for(UserCustom userCustom : userlist) {
+				userService.updateUser(userCustom.getId(), userCustom);
+			}
+		}
+		
+		return "user/success";
 	}
 }

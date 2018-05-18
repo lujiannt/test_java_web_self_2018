@@ -6,6 +6,7 @@ public class UserVo{
 	private User user;
 	private UserCustom userCustom;
 	private List<Integer> ids;
+	private List<UserCustom> userList;
 	
 	public List<Integer> getIds() {
 		return ids;
@@ -25,5 +26,10 @@ public class UserVo{
 	public void setUserCustom(UserCustom userCustom) {
 		this.userCustom = userCustom;
 	}
-	
+	public List<UserCustom> getUserList() {
+		return userList;
+	}
+	public void setUserList(List<UserCustom> userList) {
+		this.userList = userList;
+	}
 }
