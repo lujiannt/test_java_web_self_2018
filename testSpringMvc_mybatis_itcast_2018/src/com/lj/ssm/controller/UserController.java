@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -151,6 +154,11 @@ public class UserController {
 	 *  	--因为date格式多样，如yyyy-MM-dd或者yyyy/MM/dd，springMvc无法确定
 	 *  	所以需要自定义一个Date转换器
 	 *  		拓展有时候也会创建去掉字符串前后空格的转换器
+	 *  5.参数校验
+	 *  	1.加入jar包（这里使用的是hibernate的校验jar包）
+	 *  	2.springmVC配置文件，配置校验器
+	 *  	3.对应model加校验注解
+	 *  	4.controller方法中在对应model前加@Validated，并且新增参数BindingResult，要注意他们是配对的缺一不可
 	 * @param model
 	 * @return
 	 * @throws Exception
@@ -158,10 +166,20 @@ public class UserController {
 	 * @create 2018年5月16日
 	 */
 	@RequestMapping(value="/user_edit",method={RequestMethod.POST})
-	public String user_edit(HttpServletRequest request, Integer id, UserCustom userCustom) throws Exception {
+	public String user_edit(HttpServletRequest request, Model model, Integer id, @Validated UserCustom userCustom,
+			BindingResult bindingResult) throws Exception {
 		
-		userService.updateUser(id, userCustom);
-
+		if(bindingResult.hasErrors()) {
+			for(ObjectError error : bindingResult.getAllErrors()) {
+				System.out.println(error.getDefaultMessage());
+			}
+			model.addAttribute("errors", bindingResult.getAllErrors());
+			
+			return "forward:user_openToEdit?id="+id;
+		}else {
+			userService.updateUser(id, userCustom);
+		}
+		
 		//转发
 		return "forward:user_list";
 		//重定向
@@ -225,7 +243,7 @@ public class UserController {
 	}
 	
 	/**
-	 * 量编辑用户_list<UserCustom>
+	 * 批量编辑用户_list<UserCustom>
 	 * @return
 	 * @throws Exception
 	 * @author lujian

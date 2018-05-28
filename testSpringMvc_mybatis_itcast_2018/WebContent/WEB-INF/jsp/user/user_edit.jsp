@@ -11,8 +11,8 @@
 </head>
 <body> 
 <!-- 显示错误信息 -->
-<c:if test="${allErrors!=null }">
-	<c:forEach items="${allErrors }" var="error">
+<c:if test="${errors!=null }">
+	<c:forEach items="${errors }" var="error">
 	${ error.defaultMessage}<br/>
 </c:forEach>
 </c:if>

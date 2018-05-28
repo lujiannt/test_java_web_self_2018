@@ -2,6 +2,8 @@ package com.lj.ssm.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 public class User {
 	/*状态常量 0:已删除 1：正常*/
 	public static final short STATUS_DELETE = 0;
@@ -9,6 +11,7 @@ public class User {
 	
 	private int id;
 	private short status;
+	@Size(max=5,message="{user.userName.length.error}")
 	private String userName;
 	private Integer age;
 	private Date createTime;
