@@ -2,7 +2,11 @@ package com.lj.ssm.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.lj.ssm.validate.group.ValidateGroup1;
+import com.lj.ssm.validate.group.ValidateGroup2;
 
 public class User {
 	/*状态常量 0:已删除 1：正常*/
@@ -11,8 +15,9 @@ public class User {
 	
 	private int id;
 	private short status;
-	@Size(max=5,message="{user.userName.length.error}")
+	@Size(max=5,message="{user.userName.length.error}",groups={ValidateGroup1.class})
 	private String userName;
+	@NotNull(message="{user.age.isNull.error}",groups={ValidateGroup2.class})
 	private Integer age;
 	private Date createTime;
 	

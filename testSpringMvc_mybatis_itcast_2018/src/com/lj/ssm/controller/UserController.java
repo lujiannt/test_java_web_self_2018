@@ -1,8 +1,10 @@
 package com.lj.ssm.controller;
 
+import java.security.acl.Group;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.lj.ssm.model.UserCustom;
 import com.lj.ssm.model.UserVo;
 import com.lj.ssm.service.UserService;
+import com.lj.ssm.validate.group.ValidateGroup1;
+import com.lj.ssm.validate.group.ValidateGroup2;
 
 @RequestMapping("/user")
 @Controller
@@ -159,6 +163,7 @@ public class UserController {
 	 *  	2.springmVC配置文件中配置校验器validater，添加并配置自定义错误文件CustomValidationMessages.properties
 	 *  	3.对应model加校验注解
 	 *  	4.controller方法中在对应model前加@Validated，并且新增参数BindingResult，要注意他们是配对的缺一不可
+	 *  	5.校验分组，新建对应分组接口（无需写内容），在model里的校验注解中配置分组，在controller方法中配置分组（经过测试，如果校验器都有分组，这里方法中不配置分组的话，默认不校验）	
 	 * @param model
 	 * @return
 	 * @throws Exception
@@ -166,9 +171,9 @@ public class UserController {
 	 * @create 2018年5月16日
 	 */
 	@RequestMapping(value="/user_edit",method={RequestMethod.POST})
-	public String user_edit(HttpServletRequest request, Model model, Integer id, @Validated UserCustom userCustom,
-			BindingResult bindingResult) throws Exception {
-		
+	public String user_edit(HttpServletRequest request, Model model, Integer id,
+							@Validated(value={ValidateGroup1.class, ValidateGroup2.class}) UserCustom userCustom, 
+							BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()) {
 			for(ObjectError error : bindingResult.getAllErrors()) {
 				System.out.println(error.getDefaultMessage());
@@ -197,7 +202,6 @@ public class UserController {
 	 */
 	@RequestMapping(value="/user_deleteBatch")
 	public String user_deleteBatch(int[] ids) throws Exception {
-		
 		if(ids.length > 0) {
 			userService.deleteUserForBatch(ids);
 		}
