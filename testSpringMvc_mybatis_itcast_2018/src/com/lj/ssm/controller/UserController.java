@@ -156,7 +156,7 @@ public class UserController {
 	 *  		拓展有时候也会创建去掉字符串前后空格的转换器
 	 *  5.参数校验
 	 *  	1.加入jar包（这里使用的是hibernate的校验jar包）
-	 *  	2.springmVC配置文件，配置校验器
+	 *  	2.springmVC配置文件中配置校验器validater，添加并配置自定义错误文件CustomValidationMessages.properties
 	 *  	3.对应model加校验注解
 	 *  	4.controller方法中在对应model前加@Validated，并且新增参数BindingResult，要注意他们是配对的缺一不可
 	 * @param model
