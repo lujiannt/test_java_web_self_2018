@@ -22,7 +22,7 @@
 修改用户信息：
 <table width="100%" border=1>
 <tr>
-	<td>名称</td>
+	<td>名称${id }</td>
 	<td><input type="text" name="userName" value="${userCustom.userName }"/></td>
 </tr>
 <tr>

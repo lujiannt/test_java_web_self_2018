@@ -178,6 +178,7 @@ public class UserController {
 	 *  6.值的回显
 	 *  	1.除了modelAndView、Model、ModelMap、request中添加值，方法的参数也可以直接回显
 	 *  	2.当方法参数名和页面上不一致时，使用@ModelAttribute注解，来指定request域中的属性key值	
+	 *  	3.简单类型数据回显默认用不了，不能在页面上注解${id}获取
 	 * @param model
 	 * @return
 	 * @throws Exception
@@ -186,7 +187,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/user_edit",method={RequestMethod.POST})
 	public String user_edit(HttpServletRequest request, Model model, Integer id,
-							@ModelAttribute("user") @Validated(value={ValidateGroup1.class, ValidateGroup2.class}) UserCustom userCustom, 
+							@ModelAttribute("userCustom") @Validated(value={ValidateGroup1.class, ValidateGroup2.class}) UserCustom userCustom, 
 							BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()) {
 			for(ObjectError error : bindingResult.getAllErrors()) {
