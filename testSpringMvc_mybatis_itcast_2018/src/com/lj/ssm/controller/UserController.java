@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -163,7 +164,10 @@ public class UserController {
 	 *  	2.springmVC配置文件中配置校验器validater，添加并配置自定义错误文件CustomValidationMessages.properties
 	 *  	3.对应model加校验注解
 	 *  	4.controller方法中在对应model前加@Validated，并且新增参数BindingResult，要注意他们是配对的缺一不可
-	 *  	5.校验分组，新建对应分组接口（无需写内容），在model里的校验注解中配置分组，在controller方法中配置分组（经过测试，如果校验器都有分组，这里方法中不配置分组的话，默认不校验）	
+	 *  	5.校验分组，新建对应分组接口（无需写内容），在model里的校验注解中配置分组，在controller方法中配置分组（经过测试，如果校验器都有分组，这里方法中不配置分组的话，默认不校验）
+	 *  6.值的回显
+	 *  	1.除了modelAndView、Model、ModelMap、request中添加值，方法的参数也可以直接回显
+	 *  	2.当方法参数名和页面上不一致时，使用@ModelAttribute注解，来指定request域中的属性key值	
 	 * @param model
 	 * @return
 	 * @throws Exception
@@ -172,7 +176,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/user_edit",method={RequestMethod.POST})
 	public String user_edit(HttpServletRequest request, Model model, Integer id,
-							@Validated(value={ValidateGroup1.class, ValidateGroup2.class}) UserCustom userCustom, 
+							@ModelAttribute("user") @Validated(value={ValidateGroup1.class, ValidateGroup2.class}) UserCustom userCustom, 
 							BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()) {
 			for(ObjectError error : bindingResult.getAllErrors()) {
@@ -185,8 +189,9 @@ public class UserController {
 			userService.updateUser(id, userCustom);
 		}
 		
+		return "user/user_edit";
 		//转发
-		return "forward:user_list";
+		//return "forward:user_list";
 		//重定向
 		//return "redirect:user_list";
 	}
