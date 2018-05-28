@@ -59,6 +59,7 @@ public class UserController {
 	//		1.ModelAndView  
 	//		2.String - 使用Model或其他参数等方法传值到前台   
 	//		3.void - 可用于返回json等
+	//		4.Map
 	//	二.参数绑定
 	//		1.默认支持的参数 （springMvc在前端控制器中已经获得到这些参数，如在servletDispatcher中已经获得request，它可以直接赋值到方法中）
 	//   		①httpServletRequst 
@@ -101,6 +102,15 @@ public class UserController {
 	//					return null;
 	//				}
 	//			}
+	//		5.参数校验
+	//  		1.加入jar包（这里使用的是hibernate的校验jar包）
+	//	  		2.springmVC配置文件中配置校验器validater，添加并配置自定义错误文件CustomValidationMessages.properties
+	//	  		3.对应model加校验注解
+	//	  		4.controller方法中在对应model前加@Validated，并且新增参数BindingResult，要注意他们是配对的缺一不可
+	//	  		5.校验分组，新建对应分组接口（无需写内容），在model里的校验注解中配置分组，在controller方法中配置分组（经过测试，如果校验器都有分组，这里方法中不配置分组的话，默认不校验）
+	//		6.值的回显
+	//		 	1.除了modelAndView、Model、ModelMap、request中添加值，方法的参数也可以直接回显
+	//		 	2.当方法参数名和页面上不一致时，使用@ModelAttribute注解，来指定request域中的属性key值	
 	//
 	//	三.springMvc和Struts2的区别
 	//	springMvc:	
