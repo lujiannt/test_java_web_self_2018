@@ -15,9 +15,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -77,7 +79,7 @@ public class UserController {
 	// 				value  请求参数名
 	// 				required 可不可空
 	//   			defaultValue 默认值
-	//  		③当形参名与请求参数不一致时，也使用该注解：@PathVariable
+	//  		③当形参名与请求参数不一致时，也使用该注解：@PathVariable（rest风格）
 	//		3.pojo类	
 	//			字段名对应时，会自动映射
 	//		4.自定义参数绑定转换器
@@ -120,6 +122,7 @@ public class UserController {
 	//			1.自定义全局异常处理器需要实现HandlerExceptionResolver接口，在springMvc配置文件中配置一下bean即可（需要注意方法中的解析异常的逻辑）
 	//			2.自定义异常类只需继承exception类即可
 	//		8.上传文件
+	//		9.RESTful风格代码
 	//
 	//	三.springMvc和Struts2的区别
 	//	springMvc:	
@@ -133,6 +136,23 @@ public class UserController {
 	//
 	//
 	
+	/**
+	 * 测试rest风格代码，返回json数据
+	 * 	1.请求路径的书写方法@RequestMapping("/user_detailByRest/{id}")
+	 * 	2.参数绑定的方法@PathVariable
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 * @author lujian
+	 * @create 2018年5月29日
+	 */
+	@RequestMapping("/user_detailByRest/{id}")
+	@ResponseBody
+	public UserCustom user_testRest(@PathVariable("id") int userId) throws Exception {
+		UserCustom userCustom = userService.findUserById(userId);
+		
+		return userCustom;
+	}
 	
 	/**
 	 * 跳转到编辑用户页面
@@ -161,7 +181,6 @@ public class UserController {
 	//public String user_openToEdit(Model model, int id) throws Exception {
 	//2.请求参数和这里方法中形参名不一样时-@RequestParam
 	public String user_openToEdit(Model model, @RequestParam(value="id", required=true, defaultValue="1") int userId) throws Exception {
-		
 		UserCustom userCustom = userService.findUserById(userId);
 		model.addAttribute("userCustom", userCustom);
 		
