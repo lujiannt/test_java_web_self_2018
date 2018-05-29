@@ -119,6 +119,7 @@ public class UserController {
 	//		7.自定义全局异常处理器和自定义异常类
 	//			1.自定义全局异常处理器需要实现HandlerExceptionResolver接口，在springMvc配置文件中配置一下bean即可（需要注意方法中的解析异常的逻辑）
 	//			2.自定义异常类只需继承exception类即可
+	//		8.上传文件
 	//
 	//	三.springMvc和Struts2的区别
 	//	springMvc:	
@@ -190,6 +191,8 @@ public class UserController {
 	 *  7.自定义全局异常处理器和自定义异常类
 	 *  	1.自定义全局异常处理器需要实现HandlerExceptionResolver接口，在springMvc配置文件中配置一下bean即可（需要注意方法中的解析异常的逻辑）
 	 *  	2.自定义异常类只需继承exception类即可
+	 *  8.上传文件
+	 *  	1.用tomcat建立虚拟目录，CustomFileUtil中的uploadFile1方法
 	 * @param model
 	 * @return
 	 * @throws Exception
