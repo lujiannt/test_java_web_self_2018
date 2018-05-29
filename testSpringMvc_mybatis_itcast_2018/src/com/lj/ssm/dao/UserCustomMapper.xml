@@ -23,6 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="age != null">
 			age = #{age},
 		</if>
+		<if test="pic != null">
+			pic = #{pic},
+		</if>
 		<if test="createTime != null">
 			createTime = #{createTime},
 		</if>

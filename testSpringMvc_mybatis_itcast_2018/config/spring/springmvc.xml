@@ -70,12 +70,12 @@
 	<bean class="com.lj.ssm.exception.CustomExceptionResolver"></bean>
 	
 	<!-- 配置 文件上传的支持 -->  
-	<!-- 不配置此项无法上传文件，并且当form中有enctype="multipart/form-data"时，request.getparameter获取不到参数）
+	<!-- 不配置此项无法上传文件，并且当form中有enctype="multipart/form-data"时，request.getparameter获取不到参数）   -->  
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
         <property name="maxUploadSize" value="1024000000"/>  
         <property name="resolveLazily" value="true"/>  
         <property name="maxInMemorySize" value="4096"/>  
         <property name="defaultEncoding" value="UTF-8"/>  
-    </bean>   -->  
+    </bean>
 	
 </beans>

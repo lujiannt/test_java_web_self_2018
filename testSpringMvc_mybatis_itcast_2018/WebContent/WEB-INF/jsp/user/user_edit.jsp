@@ -17,8 +17,9 @@
 </c:forEach>
 </c:if>
 
-<form id="itemForm" action="${pageContext.request.contextPath }/user/user_edit" method="post" ><!-- enctype="multipart/form-data" -->
+<form id="itemForm" action="${pageContext.request.contextPath }/user/user_edit" method="post" enctype="multipart/form-data"> 
 <input type="hidden" name="id" value="${userCustom.id }"/>
+<input type="hidden" name="testPic" value="${userCustom.pic }"/>
 修改用户信息：
 <table width="100%" border=1>
 <tr>
@@ -34,23 +35,21 @@
 	<td>注册日期</td>
 	<td><input type="text" name="createTime" value="<fmt:formatDate value="${userCustom.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/></td>
 </tr>
-<%--
+
  <tr>
-	<td>商品图片</td>
+	<td>头像</td>
 	<td>
-		<c:if test="${items.pic !=null}">
-			<img src="/pic/${items.pic}" width=100 height=100/>
+		<c:if test="${userCustom.pic !=null}">
+			<!-- 虚拟路径（路径前有/是绝对路径 ）
+			<img src="/pic/${userCustom.pic}" width=100 height=100/>-->
+			<!-- 服务器路径 -->
+			<img src="${pageContext.request.contextPath }/upload/${userCustom.pic}" width=100 height=100/>
 			<br/>
 		</c:if>
-		<input type="file"  name="items_pic"/> 
+		<input type="file"  name="picFile"/> 
 	</td>
-</tr> 
-<tr>
-	<td>商品简介</td>
-	<td>
-	<textarea rows="3" cols="30" name="detail">${items.detail }</textarea>
-	</td>
-</tr>--%>
+</tr>
+ 
 <tr>
 <td colspan="2" align="center"><input type="submit" value="提交"/>
 </td>

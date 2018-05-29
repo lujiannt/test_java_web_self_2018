@@ -19,6 +19,7 @@ public class User {
 	private String userName;
 	@NotNull(message="{user.age.isNull.error}",groups={ValidateGroup2.class})
 	private Integer age;
+	private String pic;
 	private Date createTime;
 	
 	public int getId() {
@@ -56,6 +57,12 @@ public class User {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 	
 	

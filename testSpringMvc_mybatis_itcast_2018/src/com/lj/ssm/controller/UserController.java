@@ -1,5 +1,6 @@
 package com.lj.ssm.controller;
 
+import java.io.File;
 import java.security.acl.Group;
 import java.util.*;
 
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lj.ssm.exception.CustomException;
 import com.lj.ssm.model.UserCustom;
 import com.lj.ssm.model.UserVo;
 import com.lj.ssm.service.UserService;
+import com.lj.ssm.util.CustomFileUtil;
 import com.lj.ssm.validate.group.ValidateGroup1;
 import com.lj.ssm.validate.group.ValidateGroup2;
 
@@ -194,7 +197,7 @@ public class UserController {
 	 * @create 2018年5月16日
 	 */
 	@RequestMapping(value="/user_edit",method={RequestMethod.POST})
-	public String user_edit(HttpServletRequest request, Model model, Integer id,
+	public String user_edit(HttpServletRequest request, Model model, Integer id, MultipartFile picFile, 
 							@ModelAttribute("userCustom") @Validated(value={ValidateGroup1.class, ValidateGroup2.class}) UserCustom userCustom, 
 							BindingResult bindingResult) throws Exception {
 		if(bindingResult.hasErrors()) {
@@ -209,10 +212,20 @@ public class UserController {
 			if(userCustom.getUserName().equals("毛泽东")) {
 				throw new CustomException("名称不合法");
 			}
+			
 			//测试系统异常
 			//userCustom = null;
 			//id = -1;
+			
+			//上传头像
+			if(!picFile.isEmpty()) {
+				String path = CustomFileUtil.uploadFile(picFile, request);	
+				userCustom.setPic(path);
+			}
+			
 			userService.updateUser(id, userCustom);
+			userCustom = userService.findUserById(id);
+			model.addAttribute("userCustom", userCustom);
 		}
 		
 		return "user/user_edit";
