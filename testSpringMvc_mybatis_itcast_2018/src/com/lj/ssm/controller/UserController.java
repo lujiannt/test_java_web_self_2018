@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.lj.ssm.exception.CustomException;
 import com.lj.ssm.model.UserCustom;
 import com.lj.ssm.model.UserVo;
 import com.lj.ssm.service.UserService;
@@ -197,6 +199,13 @@ public class UserController {
 			
 			return "forward:user_openToEdit?id="+id;
 		}else {
+			//测试全局异常处理器和自定义异常捕获
+			if(userCustom.getUserName().equals("毛泽东")) {
+				throw new CustomException("名称不合法");
+			}
+			//测试系统异常
+			userCustom = null;
+			id = -1;
 			userService.updateUser(id, userCustom);
 		}
 		
