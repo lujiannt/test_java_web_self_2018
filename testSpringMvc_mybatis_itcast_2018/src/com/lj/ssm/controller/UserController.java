@@ -113,6 +113,9 @@ public class UserController {
 	//		6.值的回显
 	//		 	1.除了modelAndView、Model、ModelMap、request中添加值，方法的参数也可以直接回显
 	//		 	2.当方法参数名和页面上不一致时，使用@ModelAttribute注解，来指定request域中的属性key值	
+	//		7.自定义全局异常处理器和自定义异常类
+	//			1.自定义全局异常处理器需要实现HandlerExceptionResolver接口，在springMvc配置文件中配置一下bean即可（需要注意方法中的解析异常的逻辑）
+	//			2.自定义异常类只需继承exception类即可
 	//
 	//	三.springMvc和Struts2的区别
 	//	springMvc:	
@@ -181,6 +184,9 @@ public class UserController {
 	 *  	1.除了modelAndView、Model、ModelMap、request中添加值，方法的参数也可以直接回显
 	 *  	2.当方法参数名和页面上不一致时，使用@ModelAttribute注解，来指定request域中的属性key值	
 	 *  	3.简单类型数据回显默认用不了，不能在页面上注解${id}获取
+	 *  7.自定义全局异常处理器和自定义异常类
+	 *  	1.自定义全局异常处理器需要实现HandlerExceptionResolver接口，在springMvc配置文件中配置一下bean即可（需要注意方法中的解析异常的逻辑）
+	 *  	2.自定义异常类只需继承exception类即可
 	 * @param model
 	 * @return
 	 * @throws Exception
@@ -204,8 +210,8 @@ public class UserController {
 				throw new CustomException("名称不合法");
 			}
 			//测试系统异常
-			userCustom = null;
-			id = -1;
+			//userCustom = null;
+			//id = -1;
 			userService.updateUser(id, userCustom);
 		}
 		
