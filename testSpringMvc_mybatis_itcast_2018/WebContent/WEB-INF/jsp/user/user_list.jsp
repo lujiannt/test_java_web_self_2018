@@ -30,7 +30,11 @@
 	}
 	
 	function modifyBatch1() {
-		window.location.href="${pageContext.request.contextPath }/user/user_openToEditBatch"
+		window.location.href="${pageContext.request.contextPath }/user/user_openToEditBatch";
+	}
+	
+	function logOut() {
+		window.location.href="${pageContext.request.contextPath }/logout";
 	}
 </script>
 
@@ -39,6 +43,8 @@
 
 </head>
 <body> 
+当前用户:${userName }
+<input type="button" value="登出" onclick="logOut()"/>
 <form name="myForm" id="myForm" action="${pageContext.request.contextPath }/user/user_list" method="post">
 查询条件：
 <table width="100%" border=1>
