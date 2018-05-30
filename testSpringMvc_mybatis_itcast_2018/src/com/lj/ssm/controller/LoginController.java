@@ -1,13 +1,24 @@
 package com.lj.ssm.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.lj.ssm.model.UserCustom;
+import com.lj.ssm.model.UserVo;
+import com.lj.ssm.service.UserService;
 
 @Controller
 public class LoginController {
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 测试登录拦截器，只是简单的逻辑_登录
@@ -21,10 +32,11 @@ public class LoginController {
 		if(StringUtils.isNotBlank(userName)) {
 			session.setAttribute("userName", userName);
 			
-			return "redirect:user/user_list";
+//			return "redirect:user/user_list";
+			return "forward:user/user_list";
 		}
 		
-		return "redirect:/WEB-INF/jsp/login.jsp";
+		return "login";
 	}
 
 	/**
@@ -39,4 +51,5 @@ public class LoginController {
 		session.invalidate();
 		return "redirect:user/user_list";
 	}
+	
 }
