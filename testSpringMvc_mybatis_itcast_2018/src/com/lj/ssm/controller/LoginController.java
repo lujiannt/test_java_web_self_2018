@@ -21,7 +21,7 @@ public class LoginController {
 		if(StringUtils.isNotBlank(userName)) {
 			session.setAttribute("userName", userName);
 			
-			return "user/user_list";
+			return "redirect:user/user_list";
 		}
 		
 		return "redirect:/WEB-INF/jsp/login.jsp";
