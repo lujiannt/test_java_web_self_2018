@@ -14,7 +14,13 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
 	<!-- 注解 _配置 -->
-	
+	<!-- 方法1：解析使用@autowire，类似的比如使用@resource也需要声明@resource的解析bean，比较麻烦，方便方法见2和3
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+    -->   
+    <!-- 方法2：配置上下文注解 
+	<context:annotation-config/>  
+	--> 
+	<!-- 方法3：配置扫描包路径（本方法默认包含了方法2） --> 
 	<context:component-scan base-package="com.lj.ssm.controller"/>
 	
 	<!-- 获取静态资源(要获取静态资源如js，css,html等) -->
